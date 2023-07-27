@@ -7,13 +7,23 @@
 # Feel free to rename the models, but don't rename db_table values or field names.
 from django.db import models
 
+
 class WinSearch(models.Model):
     search_id = models.AutoField(primary_key=True)
-    user_id = models.CharField(max_length=30 ) 
+    user = models.ForeignKey("user.WinUser", models.CASCADE)  #
     search_word = models.CharField(max_length=200)
     search_time = models.DateTimeField()
 
     class Meta:
         managed = False
-        db_table = 'win_search'
+        db_table = "win_search"
 
+
+class WinSearchN(models.Model):
+    search_n_id = models.AutoField(primary_key=True)
+    search_n_word = models.CharField(max_length=200)
+    search_n_time = models.DateTimeField()
+
+    class Meta:
+        managed = False
+        db_table = "win_search_n"

@@ -95,61 +95,102 @@
 		        <div class="form-row">
 		            <div class="form-group col-md-12">
 		                <label for="inputName">Your Favorite</label><br>
-		                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label for="inputName">와인 색깔</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-		                <input type="radio" name="color" value="1" {% if fdto and fdto.fav_wine_color == 1 %}checked{%endif%}> 레드&nbsp;
-		                <input type="radio" name="color" value="2" {% if fdto and fdto.fav_wine_color == 2 %}checked{%endif%}> 화이트&nbsp;
-		                <input type="radio" name="color" value="3" {% if fdto and fdto.fav_wine_color == 3 %}checked{%endif%}> 로제&nbsp;
-		                <input type="radio" name="color" value="4" {% if fdto and fdto.fav_wine_color == 4 %}checked{%endif%}> 스파클링&nbsp;
-		                <input type="radio" name="color" value="5" {% if fdto and fdto.fav_wine_color == 5 %}checked{%endif%}> 레드 <br>
-		                
-		                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label for="inputName">와인 도수</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-		                <input type="radio" name="alc" value="1" {%if fdto and fdto.fav_alc == 1%}checked{%endif%}> 레드&nbsp;
-		                <input type="radio" name="alc" value="2" {%if fdto and fdto.fav_alc == 2%}checked{%endif%}> 화이트&nbsp;
-		                <input type="radio" name="alc" value="3" {%if fdto and fdto.fav_alc == 3%}checked{%endif%}> 로제&nbsp;
-		                <input type="radio" name="alc" value="4" {%if fdto and fdto.fav_alc == 4%}checked{%endif%}> 스파클링&nbsp;
-		                <input type="radio" name="alc" value="5" {%if fdto and fdto.fav_alc == 5%}checked{%endif%}> 레드 <br>
-		                
-		                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label for="inputName">인원 수</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-		                <input type="radio" name="num" value="1" {%if fdto and fdto.fav_numbwith == 1%}checked{%endif%}> 레드&nbsp;
-		                <input type="radio" name="num" value="2" {%if fdto and fdto.fav_numbwith == 2%}checked{%endif%}> 화이트&nbsp;
-		                <input type="radio" name="num" value="3" {%if fdto and fdto.fav_numbwith == 3%}checked{%endif%}> 로제&nbsp;
-		                <input type="radio" name="num" value="4" {%if fdto and fdto.fav_numbwith == 4%}checked{%endif%}> 스파클링&nbsp;
-		                <input type="radio" name="num" value="5" {%if fdto and fdto.fav_numbwith == 5%}checked{%endif%}> 레드 <br>
-		                
-		                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label for="inputName">단맛</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-		                <input type="radio" name="sweet" value="1" {%if fdto and fdto.fav_sweet == 1%}checked{%endif%}> 1&nbsp;
-		                <input type="radio" name="sweet" value="2" {%if fdto and fdto.fav_sweet == 2%}checked{%endif%}> 2&nbsp;
-		                <input type="radio" name="sweet" value="3" {%if fdto and fdto.fav_sweet == 3%}checked{%endif%}> 3&nbsp;
-		                <input type="radio" name="sweet" value="4" {%if fdto and fdto.fav_sweet == 4%}checked{%endif%}> 4&nbsp;
-		                <input type="radio" name="sweet" value="5" {%if fdto and fdto.fav_sweet == 5%}checked{%endif%}> 5 <br>
-		                
-		                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label for="inputName">쓴맛</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-		                <input type="radio" name="bitter" value="1" {%if fdto and fdto.fav_bitter == 1%}checked{%endif%}> 1&nbsp;
-		                <input type="radio" name="bitter" value="2" {%if fdto and fdto.fav_bitter == 2%}checked{%endif%}> 2&nbsp;
-		                <input type="radio" name="bitter" value="3" {%if fdto and fdto.fav_bitter == 3%}checked{%endif%}> 3&nbsp;
-		                <input type="radio" name="bitter" value="4" {%if fdto and fdto.fav_bitter == 4%}checked{%endif%}> 4&nbsp;
-		                <input type="radio" name="bitter" value="5" {%if fdto and fdto.fav_bitter == 5%}checked{%endif%}> 5 <br>
-		                
-		                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label for="inputName">신맛</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-		                <input type="radio" name="sour" value="1" {%if fdto and fdto.fav_sour == 1%}checked{%endif%}> 1&nbsp;
-		                <input type="radio" name="sour" value="2" {%if fdto and fdto.fav_sour == 2%}checked{%endif%}> 2&nbsp;
-		                <input type="radio" name="sour" value="3" {%if fdto and fdto.fav_sour == 3%}checked{%endif%}> 3&nbsp;
-		                <input type="radio" name="sour" value="4" {%if fdto and fdto.fav_sour == 4%}checked{%endif%}> 4&nbsp;
-		                <input type="radio" name="sour" value="5" {%if fdto and fdto.fav_sour == 5%}checked{%endif%}> 5 <br>
-		                
-		                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label for="inputName">계절</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-		                <input type="radio" name="season" value="1" {%if fdto and fdto.fav_season == 1%}checked{%endif%}> 1&nbsp;
-		                <input type="radio" name="season" value="2" {%if fdto and fdto.fav_season == 2%}checked{%endif%}> 2&nbsp;
-		                <input type="radio" name="season" value="3" {%if fdto and fdto.fav_season == 3%}checked{%endif%}> 3&nbsp;
-		                <input type="radio" name="season" value="4" {%if fdto and fdto.fav_season == 4%}checked{%endif%}> 4&nbsp;
-		                <input type="radio" name="season" value="5" {%if fdto and fdto.fav_season == 5%}checked{%endif%}> 5 <br>
-		                
-		                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label for="inputName">음식</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-		                <input type="radio" name="food" value="1" {%if fdto and fdto.fav_food == 1%}checked{%endif%}> 1&nbsp;
-		                <input type="radio" name="food" value="2" {%if fdto and fdto.fav_food == 2%}checked{%endif%}> 2&nbsp;
-		                <input type="radio" name="food" value="3" {%if fdto and fdto.fav_food == 3%}checked{%endif%}> 3&nbsp;
-		                <input type="radio" name="food" value="4" {%if fdto and fdto.fav_food == 4%}checked{%endif%}> 4&nbsp;
-		                <input type="radio" name="food" value="5" {%if fdto and fdto.fav_food == 5%}checked{%endif%}> 5 <br>
+				                	회원 맞춤 정보를 위한 survey 입니다 
+				                <br><br>
+				                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label for="inputName"> 어떤 색의 와인을 즐기고싶나요? </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				                <input type="checkbox" name="color" id="color0" value="0" checked="checked"> 선택없음 &nbsp;
+				                <input type="checkbox" name="color" id="color1" value="1"> 붉은색&nbsp;
+				                <input type="checkbox" name="color" id="color2" value="2"> 연노란색&nbsp;
+				                <input type="checkbox" name="color" id="color3" value="3"> 분홍색&nbsp;
+				                <input type="checkbox" name="color" id="color4" value="4"> 어두운색&nbsp;
+				                <input type="checkbox" name="color" id="color5" value="5"> 밝은색 <br>
+				                
+				                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label for="inputName"> 선호하는 주종이 있나요? </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				                <input type="checkbox" name="alc" id="alc0" value="0" checked="checked"> 선택없음 &nbsp;
+				                <input type="checkbox" name="alc" id="alc1" value="1"> 맥주 &nbsp;
+				                <input type="checkbox" name="alc" id="alc2" value="2"> 소주 &nbsp;
+				                <input type="checkbox" name="alc" id="alc3" value="3"> 위스키 &nbsp;
+				                <input type="checkbox" name="alc" id="alc4" value="4"> 다 좋아요  &nbsp;
+				                <input type="checkbox" name="alc" id="alc5" value="5"> 와인으로 술을 처음 시도해봐요<br>
+				                
+				                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label for="inputName"> 와인을 마신다면 선호하는 인원 수는? </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				                <input type="checkbox" name="comp_num" id="comp_num0" value="0" checked="checked"> 선택없음 &nbsp;
+				                <input type="checkbox" name="comp_num" id="comp_num1" value="1"> 혼술 &nbsp;
+				                <input type="checkbox" name="comp_num" id="comp_num2" value="2"> 2명이서 &nbsp;
+				                <input type="checkbox" name="comp_num" id="comp_num3" value="3"> 3~5명 모임 &nbsp;
+				                <input type="checkbox" name="comp_num" id="comp_num4" value="4"> 6명 이상 &nbsp;<br>
+				                
+				                <br> 와인의 어떤 맛을 원하나요?  <br>
+				                
+				                
+				                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label for="inputName"> 나는 단맛이 좋다 </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				                <input type="checkbox" name="sweet" id="sweet1" value="1"> 매우 그렇다 &nbsp;
+				                <input type="checkbox" name="sweet" id="sweet2" value="2"> 그렇다 &nbsp;
+				                <input type="checkbox" name="sweet" id="sweet3" value="3" checked="checked"> 보통(모르겠다) &nbsp;
+				                <input type="checkbox" name="sweet" id="sweet4" value="4"> 그렇지 않다 &nbsp;
+				                <input type="checkbox" name="sweet" id="sweet5" value="5"> 전혀 그렇지 않다 <br>
+				                
+				                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label for="inputName">  나는 떫은 맛(쓴맛)이 좋다 </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				                <input type="checkbox" name="bitter" id="bitter1" value="1"> 매우 그렇다 &nbsp;
+				                <input type="checkbox" name="bitter" id="bitter2" value="2"> 그렇다 &nbsp;
+				                <input type="checkbox" name="bitter" id="bitter3" value="3" checked="checked"> 보통(모르겠다) &nbsp;
+				                <input type="checkbox" name="bitter" id="bitter4" value="4"> 그렇지 않다 &nbsp;
+				                <input type="checkbox" name="bitter" id="bitter5" value="5"> 전혀 그렇지 않다 <br>
+				                
+				                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label for="inputName">  나는 신맛(새콤한 맛)이 좋다 </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				                <input type="checkbox" name="sour" id="sour1" value="1"> 매우 그렇다 &nbsp;
+				                <input type="checkbox" name="sour" id="sour2" value="2"> 그렇다 &nbsp;
+				                <input type="checkbox" name="sour" id="sour3" value="3" checked="checked"> 보통(모르겠다) &nbsp;
+				                <input type="checkbox" name="sour" id="sour4" value="4"> 그렇지 않다 &nbsp;
+				                <input type="checkbox" name="sour" id="sour5" value="5"> 전혀 그렇지 않다 <br>
+				                
+				                <br><br>
+				                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label for="inputName"> 와인을 특히 즐기고싶은 계절이 있다면? </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+				                <input type="checkbox" name="season" id="season0" value="0" checked="checked"> don't care
+				                <input type="checkbox" name="season" id="season1" value="1"> 봄 &nbsp;
+				                <input type="checkbox" name="season" id="season2" value="2"> 여름 &nbsp;
+				                <input type="checkbox" name="season" id="season3" value="3"> 가을 &nbsp;
+				                <input type="checkbox" name="season" id="season4" value="4"> 겨울 &nbsp; <br>
+				                <br>
+				                
+				                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label for="inputName"> 와인과 함께 먹고싶은 음식은? </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				                <input type="checkbox" name="food" id="food0" value="0" checked="checked"> 선택없음 &nbsp;
+				                <input type="checkbox" name="food" id="food1" value="1"> 스테이크(소고기) &nbsp;
+				                <input type="checkbox" name="food" id="food2" value="2"> 돼지고기 &nbsp;
+				                <input type="checkbox" name="food" id="food3" value="3"> 생선류 &nbsp;
+				                <input type="checkbox" name="food" id="food4" value="4"> 치킨 &nbsp; 
+				                <input type="checkbox" name="food" id="food5" value="5"> 해산물 &nbsp; <br>
+
+
+								 <br> 우선 순위 <br>
+								 
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label for="inputName"> 1등 </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				                <input type="radio" name="fav_first" id="fav_first0" value="0"> 선택없음 &nbsp;
+				                <input type="radio" name="fav_first" id="fav_first1" value="1"> 색깔 &nbsp;
+				                <input type="radio" name="fav_first" id="fav_first2" value="2"> 도수 &nbsp;	          
+				                <input type="radio" name="fav_first" id="fav_first4" value="3"> 단맛 &nbsp;
+				                <input type="radio" name="fav_first" id="fav_first5" value="4"> 쓴맛 &nbsp;
+				                <input type="radio" name="fav_first" id="fav_first6" value="5"> 신맛 &nbsp;				                
+				                <input type="radio" name="fav_first" id="fav_first8" value="6"> 음식 &nbsp; <br>
+				                 
+				                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label for="inputName"> 2등 </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				                <input type="radio" name="fav_second" id="fav_second0" value="0"> 선택없음 &nbsp;
+				                <input type="radio" name="fav_second" id="fav_second1" value="1"> 색깔 &nbsp;
+				                <input type="radio" name="fav_second" id="fav_second2" value="2"> 도수 &nbsp;				               
+				                <input type="radio" name="fav_second" id="fav_second4" value="3"> 단맛 &nbsp;
+				                <input type="radio" name="fav_second" id="fav_second5" value="4"> 쓴맛 &nbsp;
+				                <input type="radio" name="fav_second" id="fav_second6" value="5"> 신맛 &nbsp;				              
+				                <input type="radio" name="fav_second" id="fav_second8" value="6"> 음식 &nbsp; <br>
+				                
+				                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label for="inputName"> 3등 </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				                <input type="radio" name="fav_third" id="fav_third0" value="0"> 선택없음 &nbsp;
+				                <input type="radio" name="fav_third" id="fav_third1" value="1"> 색깔 &nbsp;
+				                <input type="radio" name="fav_third" id="fav_third2" value="2"> 도수 &nbsp;				             
+				                <input type="radio" name="fav_third" id="fav_third4" value="3"> 단맛 &nbsp;
+				                <input type="radio" name="fav_third" id="fav_third5" value="4"> 쓴맛 &nbsp;
+				                <input type="radio" name="fav_third" id="fav_third6" value="5"> 신맛 &nbsp;				               
+				                <input type="radio" name="fav_third" id="fav_third8" value="6"> 음식 &nbsp; <br>
 		            </div>
 		        </div>
 
