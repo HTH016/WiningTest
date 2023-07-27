@@ -1,0 +1,128 @@
+{% load static %}
+
+<html>
+	<head>
+	
+	<style>
+		.all-browsers {
+		  margin: 0;
+		  padding: 5px;
+		  background-color: lightgray;
+		}
+		
+		.all-browsers > h1, .browser {
+		  margin: 10px;
+		  padding: 5px;
+		}
+		
+		.browser {
+		  background: white;
+		}
+		
+		.browser > h2, p {
+		  margin: 4px;
+		  font-size: 90%;
+		}
+		
+		footer {
+		  text-align: center;
+		  padding: 3px;
+		  background-color: lightsteelblue;
+		  color: white;
+		}
+	</style>
+	
+	
+	
+	
+	
+	<link rel="stylesheet" type="text/css" href="{% static 'bootstrap.min.css' %}">
+	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&display=swap" rel="stylesheet">
+	<meta charset="UTF-8">
+		<title> 게시판 </title>
+		<link rel="stylesheet" type="text/css" href="{% static 'bootstrap.min.css' %}">	
+		<script src="{% static 'js/jquery-3.6.4.js'%}"></script>
+		<script src="{% static 'js/script_board.js'%}"></script>
+		<style>
+			.center-text {
+				display: flex;
+				justify-content: center;
+			}
+			.right-align {
+				float:right;
+			}
+		</style>
+	</head>
+	<body>
+		
+		<!--  
+		{% load static %}user
+		<img src="{% static 'images/16.JPG' %}" alt="16">
+		-->
+		
+		<br>&nbsp;&nbsp;&nbsp;
+		
+  		&nbsp;&nbsp;&nbsp;
+  		
+		{% if request.session.memid  %}			<!-- 로그인 상단 바 -->
+			<div class="right-align">
+  				<a href="/user/logout" class="btn btn-primary"> 로그아웃 </a> &nbsp;&nbsp;&nbsp;
+  				<a href="/user/myPage" class="btn btn-primary"> 마이페이지 </a> &nbsp;&nbsp;&nbsp;
+				<a href="/board/list" class="btn btn-primary"> 게시판 </a> &nbsp;&nbsp;&nbsp;&nbsp;
+				<a href="/search/main" class="btn btn-primary"> 메인/검색 </a> &nbsp;&nbsp;&nbsp;&nbsp;
+			</div>
+		{% else %}								<!-- 비로그인 상단 바 -->
+			<div class="right-align">
+  				<a href="/user/login" class="btn btn-primary"> 로그인 </a> &nbsp;&nbsp;&nbsp;
+				<a href="/board/list" class="btn btn-primary"> 게시판 </a> &nbsp;&nbsp;&nbsp;&nbsp;
+				<a href="/search/main" class="btn btn-primary"> 메인/검색 </a> &nbsp;&nbsp;&nbsp;&nbsp;
+			</div>
+		{% endif %}
+	
+		<br><br>
+		<div class="center-text">
+			{% block title %} <h2> 자유게시판 </h2> {% endblock %}
+		</div>
+		<br><br>
+		{% block content %}
+		
+		
+		
+		{% endblock %}
+		
+		
+		
+    		<!-- 하단 내용 작성 -->
+   		<footer>
+   			<br>
+   			<p>&copy; 2023 WINING website. All rights reserved.</p>
+   			<br>
+  			<p>Author: 비트교육센터 종강좀 해라 방학이라도 해<br>
+  				<a>IN CONTACT : www.naver.com<br>
+  				   9월에 몽골가는 날만 간절히 기다리는 중이다.</a>
+  		    </p>
+		
+				
+				<br>
+				
+		</footer>
+	</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

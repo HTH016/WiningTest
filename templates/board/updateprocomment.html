@@ -1,0 +1,53 @@
+{% extends "board/base.html" %}
+
+{% block title %} <h2>글 수정</h2> {% endblock %}
+
+{% block content %}
+    <form method="post" action="updateprocomment" name="updatecommentform" class="updatecomment-form" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input type="hidden" name="num" value="{{ dto.board_id }}">
+        
+        <div class="row justify-content-center">
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <label for="subject">글 제목</label>
+                    <input class="form-control" type="text" name="content" id="comment_content" maxlength="300" autofocus value="{{ dtc.comment_content }}">
+                </div>
+            </div>
+        </div>
+        
+        <div class="row justify-content-center">
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <label for="comment_content">내용</label>
+                    <textarea class="form-control" name="comment_content" id="comment_content" rows="10" cols="40">{{ dtc.comment_content }}</textarea>
+                </div>
+            </div>
+        </div>
+        
+        
+        <br><br>
+        <div class="row justify-content-center">
+            <div class="col-lg-6">
+                <div class="form-group text-center">
+                    <input class="btn btn-primary" type="submit" value="확인">
+                    <input class="btn btn-secondary" type="reset" value="수정 취소">
+                    <input class="btn btn-secondary" type="button" value="뒤로 가기" onclick="history.go(-1)">
+                </div>
+            </div>
+        </div>
+    </form>
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+

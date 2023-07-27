@@ -1,0 +1,65 @@
+{% extends "board/base.html" %}
+
+{% block title %} <h2>글 수정</h2> {% endblock %}
+
+{% block content %}
+    <form method="post" action="updatepro" name="updateform" class="update-form" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input type="hidden" name="num" value="{{ dto.board_id }}">
+        
+        <div class="row justify-content-center">
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <label for="subject">글 제목</label>
+                    <input class="form-control" type="text" name="subject" id="subject" maxlength="300" autofocus value="{{ dto.board_title }}">
+                </div>
+            </div>
+        </div>
+        
+        <div class="row justify-content-center">
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <label for="content">내용</label>
+                    <textarea class="form-control" name="content" id="content" rows="10" cols="40">{{ dto.board_content }}</textarea>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row justify-content-center">
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <label for="img">이미지</label>
+                    <input class="form-control" type="file" name="img" id="img" accept="image/*">
+                    {% if dti and dti.board_image %}
+					    <img src="{{ dti.board_image.url }}" alt="이미지">
+					    <p>이전에 첨부했던 사진은 {{dti.board_image.name }}입니다. </p>
+					{% endif %}
+                </div>
+            </div>
+        </div>
+        
+        <br><br>
+        <div class="row justify-content-center">
+            <div class="col-lg-6">
+                <div class="form-group text-center">
+                    <input class="btn btn-primary" type="submit" value="확인">
+                    <input class="btn btn-secondary" type="reset" value="수정 취소">
+                    <input class="btn btn-secondary" type="button" value="뒤로 가기" onclick="history.go(-1)">
+                </div>
+            </div>
+        </div>
+    </form>
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+

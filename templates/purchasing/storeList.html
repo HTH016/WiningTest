@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Wining</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <script src="/static/js/storeListScript.js" defer></script>
+</head>
+<body>
+
+	<div class="row">
+		<div class="col">
+			상품명
+		</div>
+		<div class="col">
+			가격
+		</div>
+		<div class="col">
+			점포명
+		</div>
+		<div class="col">
+			점포 위치
+		</div>
+	</div>
+	{% for storeList in store_lists %}
+	<div class="row">
+		<div class="col">
+		<input type="hidden" name="sellId" value="{{storeList.sell_id}}">
+			<p>{{storeList.wine__wine_name}}</p>
+		</div>
+		<div class="col">
+			<p>{{storeList.sell_price}}</p>
+		</div>
+		<div class="col" onclick="location='detail-product-info?sellid={{storeList.sell_id}}'">
+			<p>{{storeList.store__store_name}}</p>	<!-- 점포명에 이벤트 리스너 주기 -->
+		</div>
+  		<div class="col">
+			<p>{{storeList.store__store_address}}</p>
+		</div> 
+	</div>
+	{% endfor %}
+	
+	<div class="row">
+		<div class="col" style="text-align:center">
+			<input type="button" id="btnBack" value="뒤로가기" onclick="history.back()">
+		</div>
+	</div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</body>
+
+</html>

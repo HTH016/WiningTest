@@ -1,0 +1,168 @@
+{%extends "user/base.html"%}
+{%csrf_token%}
+
+{%block title%} <h2>  </h2> {%endblock%}
+
+{%block content%}
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <style>
+    /* Set height of the grid so .sidenav can be 100% (adjust if needed) */
+    .row.content {height: 1500px}
+    
+    /* Set gray background color and 100% height */
+    .sidenav {
+      background-color: #f1f1f1;
+      height: 100%;
+    }
+    
+    /* Set black background color, white text and some padding */
+    footer {
+      background-color: #555;
+      color: white;
+      padding: 15px;
+    }
+    
+    /* On small screens, set height to 'auto' for sidenav and grid */
+    @media screen and (max-width: 767px) {
+      .sidenav {
+        height: auto;
+        padding: 15px;
+      }
+      .row.content {height: auto;} 
+    }
+  </style>
+</head>
+<body>
+
+
+<div class="container-fluid">
+<div class="row content">
+	<div class="col-sm-3 sidenav">
+		<h4><a href="myPage">마이페이지</a></h4>
+		<ul class="nav nav-pills nav-stacked">
+			<li class="active"><a href="modifyUser">회원정보수정</a></li>
+			<li><a href="reviewList">리뷰 관리</a></li>
+			<li><a href="purchaseDetail">구매 내역</a></li>
+			<li><a href="#section4">장바구니</a></li>
+			<li><a href="myBoard">게시글 관리</a></li>
+			<li><a href="myComment">댓글 관리</a></li>
+			<li><a href="delete">회원 탈퇴</a></li>
+		</ul><br>
+	</div>
+	<div class="tab-content" id="myTabContent">
+		<div class="tab-pane fade show active" id="register" role="tabpanel" aria-labelledby="register-tab">
+		    <h4 class="text-center mt-4 mb-4" style="text-transform: uppercase;">회원정보수정</h4>
+		    <form method="post" action="modifyUser" name="modifyform">
+		    <input type="hidden" name="user_id" value="{{dto.user_id}}">
+		        <div class="form-row">
+		            <div class="form-group col-md-12">
+		                <label for="inputName">Your ID</label>
+		                <br>
+		                {{dto.user_id}}
+		            </div>
+		            <div class="form-group col-md-12">
+		                <label for="inputName">Your Password</label>
+		                <input type="password" class="form-control" id="user_passwd" value="{{dto.user_passwd}}" name="user_passwd">
+		            </div>
+		        </div>
+		        <div class="form-row">
+		            <div class="form-group col-md-12">
+		                <label for="inputName">Your Confirm Password</label>
+		                <input type="password" class="form-control" id="user_repasswd" value="{{dto.user_passwd}}" name="user_repasswd">
+		            </div>
+		            <div class="form-group col-md-12">
+		                <label for="inputName">Your Name</label>
+		                <br>
+		                {{dto.user_name}}
+		            </div>
+		        </div>
+		        <div class="form-row">
+		            <div class="form-group col-md-12">
+		                <label for="inputName">Your Email Address</label>
+		                <input type="email" class="form-control" id="user_email" value="{{dto.user_email}}" name="user_email">
+		            </div>
+		            <div class="form-group col-md-12">
+		                <label for="inputName">Your Tel Number</label>
+		                <input type="text" class="form-control" id="user_tel" value="{{dto.user_tel}}" name="user_tel">
+		            </div>
+		        </div>
+		        <div class="form-row">
+		            <div class="form-group col-md-12">
+		                <label for="inputName">Your Favorite</label><br>
+		                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label for="inputName">와인 색깔</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		                <input type="radio" name="color" value="1" {% if fdto and fdto.fav_wine_color == 1 %}checked{%endif%}> 레드&nbsp;
+		                <input type="radio" name="color" value="2" {% if fdto and fdto.fav_wine_color == 2 %}checked{%endif%}> 화이트&nbsp;
+		                <input type="radio" name="color" value="3" {% if fdto and fdto.fav_wine_color == 3 %}checked{%endif%}> 로제&nbsp;
+		                <input type="radio" name="color" value="4" {% if fdto and fdto.fav_wine_color == 4 %}checked{%endif%}> 스파클링&nbsp;
+		                <input type="radio" name="color" value="5" {% if fdto and fdto.fav_wine_color == 5 %}checked{%endif%}> 레드 <br>
+		                
+		                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label for="inputName">와인 도수</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		                <input type="radio" name="alc" value="1" {%if fdto and fdto.fav_alc == 1%}checked{%endif%}> 레드&nbsp;
+		                <input type="radio" name="alc" value="2" {%if fdto and fdto.fav_alc == 2%}checked{%endif%}> 화이트&nbsp;
+		                <input type="radio" name="alc" value="3" {%if fdto and fdto.fav_alc == 3%}checked{%endif%}> 로제&nbsp;
+		                <input type="radio" name="alc" value="4" {%if fdto and fdto.fav_alc == 4%}checked{%endif%}> 스파클링&nbsp;
+		                <input type="radio" name="alc" value="5" {%if fdto and fdto.fav_alc == 5%}checked{%endif%}> 레드 <br>
+		                
+		                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label for="inputName">인원 수</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		                <input type="radio" name="num" value="1" {%if fdto and fdto.fav_numbwith == 1%}checked{%endif%}> 레드&nbsp;
+		                <input type="radio" name="num" value="2" {%if fdto and fdto.fav_numbwith == 2%}checked{%endif%}> 화이트&nbsp;
+		                <input type="radio" name="num" value="3" {%if fdto and fdto.fav_numbwith == 3%}checked{%endif%}> 로제&nbsp;
+		                <input type="radio" name="num" value="4" {%if fdto and fdto.fav_numbwith == 4%}checked{%endif%}> 스파클링&nbsp;
+		                <input type="radio" name="num" value="5" {%if fdto and fdto.fav_numbwith == 5%}checked{%endif%}> 레드 <br>
+		                
+		                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label for="inputName">단맛</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		                <input type="radio" name="sweet" value="1" {%if fdto and fdto.fav_sweet == 1%}checked{%endif%}> 1&nbsp;
+		                <input type="radio" name="sweet" value="2" {%if fdto and fdto.fav_sweet == 2%}checked{%endif%}> 2&nbsp;
+		                <input type="radio" name="sweet" value="3" {%if fdto and fdto.fav_sweet == 3%}checked{%endif%}> 3&nbsp;
+		                <input type="radio" name="sweet" value="4" {%if fdto and fdto.fav_sweet == 4%}checked{%endif%}> 4&nbsp;
+		                <input type="radio" name="sweet" value="5" {%if fdto and fdto.fav_sweet == 5%}checked{%endif%}> 5 <br>
+		                
+		                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label for="inputName">쓴맛</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		                <input type="radio" name="bitter" value="1" {%if fdto and fdto.fav_bitter == 1%}checked{%endif%}> 1&nbsp;
+		                <input type="radio" name="bitter" value="2" {%if fdto and fdto.fav_bitter == 2%}checked{%endif%}> 2&nbsp;
+		                <input type="radio" name="bitter" value="3" {%if fdto and fdto.fav_bitter == 3%}checked{%endif%}> 3&nbsp;
+		                <input type="radio" name="bitter" value="4" {%if fdto and fdto.fav_bitter == 4%}checked{%endif%}> 4&nbsp;
+		                <input type="radio" name="bitter" value="5" {%if fdto and fdto.fav_bitter == 5%}checked{%endif%}> 5 <br>
+		                
+		                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label for="inputName">신맛</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		                <input type="radio" name="sour" value="1" {%if fdto and fdto.fav_sour == 1%}checked{%endif%}> 1&nbsp;
+		                <input type="radio" name="sour" value="2" {%if fdto and fdto.fav_sour == 2%}checked{%endif%}> 2&nbsp;
+		                <input type="radio" name="sour" value="3" {%if fdto and fdto.fav_sour == 3%}checked{%endif%}> 3&nbsp;
+		                <input type="radio" name="sour" value="4" {%if fdto and fdto.fav_sour == 4%}checked{%endif%}> 4&nbsp;
+		                <input type="radio" name="sour" value="5" {%if fdto and fdto.fav_sour == 5%}checked{%endif%}> 5 <br>
+		                
+		                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label for="inputName">계절</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		                <input type="radio" name="season" value="1" {%if fdto and fdto.fav_season == 1%}checked{%endif%}> 1&nbsp;
+		                <input type="radio" name="season" value="2" {%if fdto and fdto.fav_season == 2%}checked{%endif%}> 2&nbsp;
+		                <input type="radio" name="season" value="3" {%if fdto and fdto.fav_season == 3%}checked{%endif%}> 3&nbsp;
+		                <input type="radio" name="season" value="4" {%if fdto and fdto.fav_season == 4%}checked{%endif%}> 4&nbsp;
+		                <input type="radio" name="season" value="5" {%if fdto and fdto.fav_season == 5%}checked{%endif%}> 5 <br>
+		                
+		                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label for="inputName">음식</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		                <input type="radio" name="food" value="1" {%if fdto and fdto.fav_food == 1%}checked{%endif%}> 1&nbsp;
+		                <input type="radio" name="food" value="2" {%if fdto and fdto.fav_food == 2%}checked{%endif%}> 2&nbsp;
+		                <input type="radio" name="food" value="3" {%if fdto and fdto.fav_food == 3%}checked{%endif%}> 3&nbsp;
+		                <input type="radio" name="food" value="4" {%if fdto and fdto.fav_food == 4%}checked{%endif%}> 4&nbsp;
+		                <input type="radio" name="food" value="5" {%if fdto and fdto.fav_food == 5%}checked{%endif%}> 5 <br>
+		            </div>
+		        </div>
+
+		        <hr class="mt-3 mb-4">
+		        <div class="col-12">
+		            <div class="d-flex flex-wrap justify-content-between align-items-center">
+		                <button class="btn btn-primary mt-3 mt-sm-0" type="submit">Modify</button>
+		            </div>
+		        </div>
+		    </form>
+		</div>
+	</div>
+</div>
+</div>
+</body>
+{%endblock%}

@@ -1,0 +1,13 @@
+
+<html>
+<h3>댓글 삭제</h3>
+<p>댓글을 삭제하시겠습니까?</p>
+<p>{{ dtc.comment_content }}</p>
+	<form method="post" action="{% url 'board:deletecomment' %}">
+	  {% csrf_token %}
+	  <input type="hidden" name="comment_id" value="{{ dtc.comment_id }}">
+	  <input type="submit" value="확인">
+	  <a href="{% url 'board:content' dtc.board.board_id %}?pagenum={{ pagenum }}">취소</a>
+	</form>
+
+</html>

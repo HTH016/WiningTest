@@ -1,0 +1,44 @@
+{%load static%}
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title> 회원관리 </title>
+		<link rel="stylesheet" type="text/css" href="{%static 'css/bootstrap.css'%}">
+		<script src="{%static 'js/jquery-3.6.4.js'%}"></script>
+		<script src="{%static 'js/script_user.js'%}"></script>
+	</head>
+	<body>
+		{%block menu%}
+			{% if request.session.memid  %}
+			<div class="right-align">
+  				<a href="/user/logout" class="btn btn-primary"> 로그아웃 </a> &nbsp;&nbsp;&nbsp;
+  				<a href="/user/myPage" class="btn btn-primary"> 마이페이지 </a> &nbsp;&nbsp;&nbsp;
+				<a href="/board/list" class="btn btn-primary"> 게시판 </a> &nbsp;&nbsp;&nbsp;&nbsp;
+				<a href="/search/main" class="btn btn-primary"> 메인/검색 </a> &nbsp;&nbsp;&nbsp;&nbsp;
+			</div>
+			{% else %}
+			<div class="right-align">
+  				<a href="/user/login" class="btn btn-primary"> 로그인 </a> &nbsp;&nbsp;&nbsp;
+				<a href="/board/list" class="btn btn-primary"> 게시판 </a> &nbsp;&nbsp;&nbsp;&nbsp;
+				<a href="/search/main" class="btn btn-primary"> 메인/검색 </a> &nbsp;&nbsp;&nbsp;&nbsp;
+			</div>
+			{% endif %}
+		
+		{%endblock%}
+		
+		{{ memid }} 
+		{{ user_grade }}
+		
+		
+		<br><br>
+		{%block title%} <h2> 회원관리 </h2> {%endblock%}
+		<br><br>
+		{%block content%}
+		
+		{%endblock%}
+	</body>
+</html>
+
+
+										

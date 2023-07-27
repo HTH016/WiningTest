@@ -1,0 +1,40 @@
+{%load static%}
+{%csrf_token%}
+<link rel="stylesheet" type="text/css" href="{%static 'css/reviewWrite.css'%}">
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" rel="stylesheet">
+<script src="{%static 'js/jquery-3.6.4.js'%}"></script>
+<script src="{%static 'js/script_user.js'%}"></script>
+
+
+<div class="formthree ptb-100">
+	<div class="container">
+	<div class="row">
+		<div class="col-md-8 col-md-offset-2">
+		<form method="post" action="reviewWrite" name="reviewwrite">
+		<input type="hidden" name="sell_id" value="{{dto.sell_id}}">
+			<div class="row">
+				<div class="col-md-6">
+					<div class="form-group">
+						<img src="https://item.kakaocdn.net/do/227099b086918f895eaa636a43fdc9234022de826f725e10df604bf1b9725cfd" class="rounded img-fluid w-100 img-responsive">
+						<!-- 이미지 경로 <img src="{{dto.wine.wine_image}}"> -->
+				        <label><h4>{{dto.wine.wine_name}} ({{dto.sell_price}}원)</h4></label>
+				    </div>
+				</div>
+				<div class="col-md-6">
+				    <div class="form-group">
+				        <label class="sr-only">rating</label>
+				        <input type="number" step="0.1" max="5" min="0.5" class="form-control" name="rating" id="ratingSix" placeholder="rating">
+					</div>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="sr-only">Message</label>
+				<textarea class="form-control" rows="7" placeholder="Write Review" name="content"></textarea>
+			</div>
+			<button type="submit" class="btn btn-primary" id="write">Write</button>
+		</form>
+		</div>
+	</div>
+	</div>
+</div>

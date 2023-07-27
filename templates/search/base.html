@@ -1,0 +1,48 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title> search </title>
+		<script src="{% static 'js/jquery-3.6.4.js' %}"></script>
+		<script src="{% static 'js/script_search.js' %}"></script>
+	</head>
+	<body>
+		
+		{% if request.session.memid  %}
+			<div class="right-align">
+  				<a href="/user/logout" class="btn btn-primary"> 로그아웃 </a> &nbsp;&nbsp;&nbsp;
+  				<a href="/user/myPage" class="btn btn-primary"> 마이페이지 </a> &nbsp;&nbsp;&nbsp;
+				<a href="/board/list" class="btn btn-primary"> 게시판 </a> &nbsp;&nbsp;&nbsp;&nbsp;
+				<a href="/search/main" class="btn btn-primary"> 메인/검색 </a> &nbsp;&nbsp;&nbsp;&nbsp;
+			</div>
+		{% else %}
+			<div class="right-align">
+  				<a href="/user/login" class="btn btn-primary"> 로그인 </a> &nbsp;&nbsp;&nbsp;
+				<a href="/board/list" class="btn btn-primary"> 게시판 </a> &nbsp;&nbsp;&nbsp;&nbsp;
+				<a href="/search/main" class="btn btn-primary"> 메인/검색 </a> &nbsp;&nbsp;&nbsp;&nbsp;
+			</div>
+		{% endif %}			
+		
+		{{ memid }}									
+																	
+		<br><br>						
+		{% block title %} 
+			<h2 align="center"> Wining </h2> 
+		{% endblock %}
+		<br><br>
+		{% block select %}
+		
+		{% endblock %}
+		<br><br>
+		{% block input %}
+		
+		{% endblock %}
+		<br><br>
+		{% block list %}
+		
+		{% endblock %}
+		<br><br>
+		
+	</body>
+</html>

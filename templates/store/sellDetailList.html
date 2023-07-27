@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Wining</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+</head>
+<body>
+
+	<div class="row">
+		<div class="col" style="text-align:center">
+			<h1>판매 내역</h1>
+		</div>
+	</div>
+	<div class="row" style="text-align:center">
+		<div class="col-1">
+			판매 번호
+		</div>
+		<div class="col">
+			제품명
+		</div>
+		<div class="col">
+			판매 수량
+		</div>
+		<div class="col">
+			판매 금액
+		</div>
+		<div class="col">
+			수령 여부
+		</div>
+	</div>
+	{% for info in list %}
+	<div class="row" style="text-align:center">
+		<div class="col-1">
+			{{info.winpurchasedetail__purchase_detail_id}}
+		</div>
+		<div class="col">
+			{{info.wine__wine_name}}
+		</div>
+		<div class="col">
+			{{info.winpurchasedetail__purchase_det_number}}
+		</div>
+		<div class="col">
+			{{info.winpurchasedetail__purchase_det_price}}
+		</div>
+		<div class="col">
+			{% if info.winpurchasedetail__purchase_det_state == 1 %}
+			미수령
+			{% endif %}
+			{% if info.winpurchasedetail__purchase_det_state == "2" %}
+			수령
+			{% endif %}
+		</div>
+	</div>
+	{% endfor %}
+	
+	<div class="row">
+		<div class="col" style="text-align:center">
+		{% for i in pages %}
+		<a href="sell-detail-list?pageNum={{i}}">{{i}}</a>
+		{% endfor %}
+		</div>
+	</div>
+	<div class="row">
+		<div class="col" style="text-align:center">
+			<input type="button" id="btnBack" value="뒤로가기" onclick="location='store-mypage'">
+		</div>
+	</div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

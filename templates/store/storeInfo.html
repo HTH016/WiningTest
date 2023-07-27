@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Wining</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="row" style="text-align: center;">
+        <div class="col">
+            <h1>점포 정보 관리 페이지</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col" style="text-align: right;">
+            <div class="row">
+                <div class="col">
+                    매장 주소
+                </div>
+                <div class="col" style="text-align: left;">
+                    {{main_address}}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    
+                </div>
+                <div class="col" style="text-align: left;">
+                    {{detail_address}}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    상호명
+                </div>
+                <div class="col" style="text-align: left;">
+                    {{info.store_name}}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    사업자 등록 번호
+                </div>
+                <div class="col" style="text-align: left;">
+                    {{info.store_reg_num}}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    지도 URL
+                </div>
+                <div class="col" style="text-align: left;">
+                    {{info.storeUrl__store_map_url}}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    업무용 이메일
+                </div>
+                <div class="col" style="text-align: left;">
+                    {{info.store_email}}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="text-align: center;">
+        <div class="col"></div>
+        <div class="col">
+            <input type="button" id="btnModification" value="정보 수정" onclick="location='store-info-modification'">
+        </div>
+        <div class="col">
+            <input type="button" id="btnWithdrawal" value="점포 등록 해지" onclick="location='drop-store'">
+        </div>
+        <div class="col">
+            <input type="button" id="btnBack" value="뒤로가기" onclick="location='store-mypage'">
+        </div>
+        <div class="col"></div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+        crossorigin="anonymous"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Wining</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+        crossorigin="anonymous"></script>
+    <script src="/static/js/pickListScript.js" defer></script>
+</head>
+<body>
+
+	<div class="row">
+		<div class="col">
+			<h1>장바구니</h1>
+		</div>
+	</div>
+	
+	{% for page_info in page_infos %}
+		<div id="{{page_info.sell__sell_id}}" class="row">
+			<div class="col">
+				<img src="{{page_info.sell__wine__wine_image}}" alt="{{page_info.sell__wine__wine_name}}">
+			</div>
+			<div class="col">
+				<div class="row">
+					<div class="col">
+						{{page_info.sell__wine__wine_name}}
+					</div>
+				</div>
+				<div class="row">
+					<div id="1id{{page_info.cart_det_id}}" class="col">
+						{{page_info.cart_det_qnty}} 개
+					</div>
+				</div>
+				<div class="row">
+					<div id="2id{{page_info.cart_det_id}}" class="col">
+						{{page_info.purchase_price}} 원
+					</div>
+				</div>
+			</div>
+			<div class="col">
+				<input type="button" id="{{page_info.cart_det_id}}"  name="btnDelete" value="삭제">
+			</div>
+		</div>
+	{% endfor %}
+	
+	<div class="row">
+		<div class="col" style="text-align:right">
+			합계
+		</div>
+		<div id="allPrice" class="col" style="text-align:left">
+			{{all_price}} 원
+		</div>
+		<div class="col">
+		{% csrf_token %}
+			<input type="hidden" id="cartId" value="{{cart_id}}">
+			<input type="button" id="btnShowBuyList" value="결제" onclick="location='buy-list?cartid={{cart_id}}'">
+		</div>
+	</div>
+	<div class="row">
+		<div class="col" style="text-align:center">
+			<input type="button" value="뒤로가기" onclick="history.back()">
+		</div>
+	</div>
+	
+
+    
+</body>
+
+</html>

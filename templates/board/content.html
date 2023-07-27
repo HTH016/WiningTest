@@ -1,0 +1,509 @@
+{% extends "board/base.html" %}
+{% load mathfilters %}
+{% load static %}
+
+{% block title %} 
+	<div class="container">
+		<div class="row justify-content-center">
+			<div class="col-lg-8">
+				<h3 align="center" style="font-family:'Noto Sans', sans-serif; font-size: 24px; font-weight: bold; color: black;">
+					<span style="color:blue;">{{ dto.user_id }} </span>님의 게시글</h3>
+				<hr style="border-color: #777;">
+			</div>
+		</div>
+	</div>
+{% endblock %}
+
+{% block content %}
+
+<head>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+
+
+
+<button class="btn btn-primary scroll-button top-button" onclick="scrollToTop()"><i class="fas fa-arrow-up"></i> </button>
+<button class="btn btn-primary scroll-button bottom-button" onclick="scrollToBottom()"><i class="fas fa-arrow-down"></i></button>
+
+<div class="scroll-button-container">
+	<button class="btn btn-primary scroll-button copy-url-button" onclick="copyUrlToClipboard()"><i class="fas fa-link"></i></button>
+</div>
+
+<div class="container my-3">
+	{% csrf_token %}
+	
+	<div class="row">
+	    <div class="col-lg-6">
+	        <input class="btn btn-primary ml-2" type="button" value="이전으로" onclick="location='list?pagenum={{ pagenum }}'">
+			<button class="btn btn-primary" onclick="toggleLike('{{ dto.board_id }}')">
+			    {% if dto.board_like > 0 %}
+			        <i class="fas fa-heart"></i> <!-- 이미 좋아요를 누른 경우 하트 아이콘 표시 -->
+			    {% else %}
+			        <i class="far fa-heart"></i> <!-- 좋아요를 누르지 않은 경우 빈 하트 아이콘 표시 -->
+			    {% endif %}
+			    좋아요
+			</button>
+	    </div>
+	    <div class="col-lg-6 text-right">
+	        {% if request.session.memid == dto.user_id %}
+		        <input class="btn btn-lg btn-transparent btn-hover-primary" type="button" value="글수정" onclick="location='update?num={{ dto.board_id }}&pagenum={{ pagenum }}'">
+		        <input class="btn btn-lg btn-transparent btn-hover-primary" type="button" value="글삭제" onclick="confirmDelete('{{dto.board_id}}', '{{pagenum}}')">
+	    	{% endif %}
+	    </div>
+	</div>				
+						
+		<script>
+			function confirmDelete(boardId, pageNum) {
+				if (confirm('글을 삭제하시겠습니까?')) {
+					location.href = 'delete?num=' + boardId + '&pagenum=' + pageNum;
+				}
+			}
+		</script>			
+						
+<br>	
+	
+	
+	
+	
+	<div class="row">
+		<div class="col-lg-8">
+			<div class="card">
+				<div class="card-body">
+					<h3 class="card-title">{{ dto.board_title }}</h3><br>
+					
+					<p class="card-text">{{ dto.board_content }}</p>
+				</div>
+				
+
+			</div>
+		</div>
+		<div class="col-lg-4">
+			<div class="card">
+				<div class="card-body">
+					<h5 class="card-title"><b>게시글 정보</b></h5>
+					<table class="table table-bordered">
+						<tbody>
+							<tr>
+								<th>작성자</th>
+								<td>{{ dto.user_id }}</td>
+							</tr>
+							<tr>
+								<th>조회수</th>
+								<td>{{ dto.board_read_count }}</td>
+							</tr>
+							<tr>
+								<th>작성일</th>
+								<td>{{ dto.board_reg_time }}</td>
+							</tr>
+							<tr>
+								<th>댓글</th>
+								<td>{{ comment_count }}</td>
+							</tr>
+						</tbody>						
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="row mt-3">
+	    <div class="col-lg-8">
+	        <div class="card">
+	            <div class="card-body">
+	                <h5 class="card-title">이미지</h5>
+	                <div class="boundary">
+	                    {% if image_url %}
+	                        <img src="{{ image_url }}" alt="이미지">
+	                    {% else %}
+	                        <p>이미지가 없습니다.</p>
+	                    {% endif %}
+	                </div>
+	            </div>
+	        </div>
+	    </div>
+	</div>
+	
+	<br><br><br><br>
+	
+	<div class="comment-section mt-4">
+		<h3 class="section-title">&nbsp;. . . </h3>
+	
+		<!-- 댓글 작성 폼 -->
+		<form id="comment-form" class="comment-form d-flex flex-column justify-content-end">
+			<input type="hidden" name="board_id" value="{{ dto.board_id }}">
+			{% if request.session.memid %}
+				<div class="form-group">
+					<input type="text" name="writer" class="form-control input-small" placeholder="{{request.session.memid}}">
+				</div>
+			{% endif %}
+			<br>
+			<div class="form-group d-flex">
+				<textarea name="content" class="form-control flex-grow-1" placeholder="댓글 내용을 입력하세요..."></textarea>
+			</div>
+			<br>
+			<button type="submit" class="btn btn-primary ml-2">댓글입력</button>
+		</form>
+	
+		<br><br>
+	
+	
+	
+		<h3 class="section-title">&nbsp;<span class="comment-count"> 총 댓글 : {{ comment_count }}개</span></h3>
+		
+		<table class="table table-striped">
+			<thead class="table table-dark">
+				<tr>
+					<th style="width: 20%">댓글 작성자</th>
+					<th style="width: 50%">댓글 내용</th>
+					<th> </th>
+					<th style="width: 20%">댓글 작성일</th>
+				</tr>
+			</thead>
+			
+			<tbody id="comment-table-body">
+				{% for dtc in dtcs %}
+				<tr>
+					<td>{{ dtc.user_id }}</td>
+					<td>{{ dtc.comment_content }}</td>
+					<td> <!-- 추가된 부분 -->
+						<button class="edit-button" onclick="editComment('{{ dtc.comment_id }}')">수정</button>
+						&nbsp;
+						<button class="delete-button" onclick="confirmDeleteComment('{{ dtc.comment_id }}')">삭제</button>
+					</td>
+					<td>{{ dtc.comment_reg_time }}</td>
+				</tr>
+				{% empty %}
+				<tr>
+					<td colspan="4" align="center">댓글이 하나토 없습니다.</td>
+				</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	
+	</div>
+</div><br><br>
+
+<!-- 사용자별로 색상 다르게 하는 코드 -->
+<script>
+
+		function toggleLike(boardId) {
+		    // AJAX를 이용하여 서버에 좋아요 처리 요청 보내기
+		    fetch(`/board/toggle_like?num=${boardId}`, {
+		        method: 'POST',
+		        headers: {
+		            'Content-Type': 'application/json',
+		            'X-CSRFToken': getCookie('csrftoken'), // CSRF 토큰 설정
+		        },
+		    })
+		    .then(response => response.json())
+		    .then(data => {
+		        if (data.success) {
+		            // 서버에서 좋아요 처리가 성공한 경우, 좋아요 버튼을 업데이트
+		            const likeButton = document.querySelector(`[onclick="toggleLike('${boardId}')"]`);
+		            const likeIcon = likeButton.querySelector('i');
+		            if (data.liked) {
+		                likeIcon.className = 'fas fa-heart';
+		            } else {
+		                likeIcon.className = 'far fa-heart';
+		            }
+		        } else {
+		            alert('좋아요 처리에 실패했습니다.');
+		        }
+		    })
+		    .catch(error => {
+		        console.error('Error:', error);
+		        alert('좋아요 처리에 실패했습니다.');
+		    });
+		}
+		
+		// CSRF 토큰을 가져오는 함수
+		function getCookie(name) {
+		    var cookieValue = null;
+		    if (document.cookie && document.cookie !== '') {
+		        var cookies = document.cookie.split(';');
+		        for (var i = 0; i < cookies.length; i++) {
+		            var cookie = cookies[i].trim();
+		            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+		                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+		                break;
+		            }
+		        }
+		    }
+		    return cookieValue;
+		}	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	function copyUrlToClipboard() {
+	    // 복사할 URL 가져오기
+	    var url = window.location.href;
+	
+	    // 가상의 textarea 엘리먼트를 생성하여 값을 할당하고 복사
+	    var textarea = document.createElement("textarea");
+	    textarea.value = url;
+	    document.body.appendChild(textarea);
+	    textarea.select();
+	    document.execCommand("copy");
+	    document.body.removeChild(textarea);
+	
+	    // 복사 성공 메시지 등 필요한 작업 추가
+	    alert("URL이 클립보드에 복사되었습니다.");
+	  }
+
+
+	function scrollToTop() {
+	  window.scrollTo(0, 0);
+	}
+
+	function scrollToBottom() {
+	  window.scrollTo(0, document.body.scrollHeight);
+	}
+
+
+
+
+
+
+	function getRandomColor() {
+		var letters = '0123456789ABCDEF';
+		var color = '#';
+		for (var i = 0; i < 6; i++) {
+			color += letters[Math.floor(Math.random() * 16)];
+		}
+		return color;
+	}
+
+	var usernames = document.querySelectorAll('.comment-section table tbody tr td:first-child');
+	var usernameColors = {};
+
+	for (var i = 0; i < usernames.length; i++) {
+		var username = usernames[i].textContent.trim();
+		if (!usernameColors[username]) {
+			usernameColors[username] = getRandomColor();
+		}
+		usernames[i].style.color = usernameColors[username];
+	}
+
+	
+	
+	
+	
+	
+	
+	document.getElementById("comment-form").addEventListener("submit", function (event) {
+		event.preventDefault(); // 기본 동작 중단
+
+		var form = new FormData(this);
+
+		var xhr = new XMLHttpRequest();
+		xhr.open("POST", "{% url 'board:writecomment' %}", true);
+		xhr.onreadystatechange = function () {
+			if (xhr.readyState === XMLHttpRequest.DONE) {
+				if (xhr.status === 200) {
+					// 서버로부터 받은 응답 처리
+					try {
+						var response = JSON.parse(xhr.responseText);
+						if (response.success) {
+							// 새로운 댓글을 추가하고 목록 업데이트
+							var commentTableBody = document.getElementById("comment-table-body");
+							var newRow = commentTableBody.insertRow();
+							//var newCell1 = newRow.insertCell();
+							var newCell2 = newRow.insertCell();
+							//newCell1.textContent = response.dtc.user_id;
+							newCell2.innerHTML = response.dtc.comment_content.replace(/\n/g, "<br>");
+							
+						} else {
+							alert("댓글 작성에 실패했습니다.");
+						}
+					}catch(error) {
+						console.error('Error : ', error);
+						//alert("댓글 작성에 성공했습니다...");
+						location.reload();
+					}
+					
+				} else {
+					alert("댓글 작성에 실패했습니다...");
+				}
+			}
+		};
+		xhr.send(form);
+		this.reset();
+		//location.reload();
+	});
+
+	
+	
+	
+	
+	
+	
+	function confirmDeleteComment(commentId, pageNum) {
+		if (confirm('댓글을 삭제하시겠습니까?')) {
+			var csrftokenElement = document.querySelector('[name=csrfmiddlewaretoken]');
+			if (csrftokenElement) {
+				var csrftoken = csrftokenElement.value;
+
+				fetch('deletecomment/' + commentId + '/?pagenum=' + pageNum, {
+					method: 'DELETE',
+					headers: {
+						'Content-Type': 'application/x-www-form-urlencoded',
+						'X-CSRFToken': csrftoken
+					}
+				})
+					.then(response => {
+						if (response.ok) {
+							return response.json();
+						} else {
+							throw new Error('댓글 삭제에 실패했습니다.');
+						}
+					})
+					.then(data => {
+						if (data.success) {
+							location.reload(); // 삭제 후 페이지를 새로고침합니다.
+						} else {
+							throw new Error('댓글 삭제에 실패했습니다.');
+						}
+					})
+					.catch(error => {
+						console.error('Error:', error);
+						alert(error.message);
+					});
+			} else {
+				console.error('CSRF 토큰을 찾을 수 없습니다.');
+			}
+		}
+	}
+
+	
+	
+	
+	
+	
+	
+	
+	function getCookie(name) {
+		var cookieValue = null;
+		if (document.cookie && document.cookie !== '') {
+			var cookies = document.cookie.split(';');
+			for (var i = 0; i < cookies.length; i++) {
+				var cookie = cookies[i].trim();
+				if (cookie.substring(0, name.length + 1) === (name + '=')) {
+					cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+					break;
+				}
+			}
+		}
+		return cookieValue;
+	}
+</script>
+
+
+<style>
+  .scroll-button {
+    position: fixed;
+    padding: 5px;
+    font-size: 18px;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    color:grey;
+  }
+
+  .top-button {
+    bottom: 60px;
+    right: 20px;
+  }
+
+  .bottom-button {
+    bottom: 20px;
+    right: 20px;
+    z-index:1;
+  }
+  
+	.scroll-button-container {
+	  position: fixed;
+	  top: 100px;
+	  right: 30px;
+	  display: flex;
+	  flex-direction: column;
+	  align-items: center;
+	  color:grey;
+	  background-color:transparent;
+	}
+  
+  
+	  .copy-url-button {
+	  z-index: 1; /* 버튼이 위에 표시되도록 설정 */
+	}
+  
+	
+	.btn-transparent {
+	color: grey;
+	}
+
+
+	.edit-button,
+	.delete-button {
+		border: none;
+		background-color: transparent;
+		padding: 0;
+	}
+
+	.edit-button:hover,
+	.delete-button:hover,
+	.edit-button:active,
+	.delete-button:active {
+		color: red; /* 원하는 색상으로 변경 */
+	}
+
+	.boundary {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		max-width: 100%;
+		height: auto;
+		overflow: hidden;
+	}
+
+	.boundary img {
+		max-width: 100%;
+		height: auto;
+	}
+
+	.input-small {
+		width: 150px;
+	}
+
+	.comment-form {
+		border: 1px solid #ccc;
+		padding: 10px;
+		border-radius: 4px;
+		background-color: #dcdcdc;
+		display: flex;
+		flex-direction: column;
+	}
+
+	textarea[name="content"] {
+		height: 150px;
+	}
+
+	.btn-primary {
+		margin-left: auto;
+	}
+	
+
+	
+</style>
+
+{% endblock %}

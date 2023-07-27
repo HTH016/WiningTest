@@ -1,0 +1,36 @@
+{% extends "board/base.html" %}
+
+{% block title %}<h2> 댓글 쓰기</h2>{% endblock %}
+
+
+{% block content %}
+<div class="container">
+	<form method="post" action="{% url 'board:writecomment' %}" name="writecommentform">
+	{% csrf_token %}
+		<!--  <input type="hidden" name="num" value="{{ num }}">-->
+		<input type="hidden" name="board_id" value="{{num}}">
+
+		<div class="mb-3">
+			<a href="{% url 'board:list' %}" class="btn btn-secondary">글 목록</a>
+		</div>
+		{% if request.session.memid %}
+			<div class="mb-3">
+				<label for="writer" class="form-label">작성자</label>
+				<input class="form-control" type="text" name="writer" id="writer" maxlength="50" value="{{ user_id }}" readonly>
+			</div>
+		{% endif %}
+		<div class="mb-3">
+			<label for="content" class="form-label">내용</label>
+			<textarea class="form-control" name="content" id="content" rows="10" cols="40" autofocus></textarea>
+		</div>
+
+		<div class="mb-3">
+			<input class="btn btn-primary" type="submit" value="작성">
+			<input class="btn btn-secondary" type="reset" value="취소" autofocus>
+			<input class="btn btn-secondary" type="button" value="작성취소" onclick="history.go(-1)">
+		</div>
+
+	</form>
+</div>
+{% endblock %}
+

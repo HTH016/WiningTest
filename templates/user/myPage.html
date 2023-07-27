@@ -1,0 +1,145 @@
+{%extends "user/base.html"%}
+
+{%block title%} <h2> </h2> {%endblock%}
+
+{%block content%}
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <style>
+    /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
+    .row.content {height: 550px}
+    
+    /* Set gray background color and 100% height */
+    .sidenav {
+      background-color: #f1f1f1;
+      height: 100%;
+    }
+        
+    /* On small screens, set height to 'auto' for the grid */
+    @media screen and (max-width: 767px) {
+      .row.content {height: auto;} 
+    }
+  </style>
+</head>
+<body>
+
+<nav class="navbar navbar-inverse visible-xs">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>                        
+      </button>
+      <a class="navbar-brand" href="myPage">마이페이지</a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav">
+        <li><a href="modifyUser">회원정보수정</a></li>
+        <li><a href="reviewList">리뷰 관리</a></li>
+        <li><a href="purchaseDetail">구매 내역</a></li>
+        <li><a href="#">장바구니</a></li>
+        <li><a href="myBoard">게시글 관리</a></li>
+        <li><a href="myComment">댓글 관리</a></li>
+        <li><a href="delete">회원 탈퇴</a></li>
+        {% if user_grade == "2" %}
+        	<li><a href="../store/storeMyPage">점주 페이지</a></li>
+      	{% endif %}
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="container-fluid">
+  <div class="row content">
+    <div class="col-sm-3 sidenav hidden-xs">
+      <h3>마이페이지</h3>
+      <ul class="nav nav-pills nav-stacked">
+        <li><a href="modifyUser">회원정보수정</a></li>
+        <li><a href="reviewList">리뷰 관리</a></li>
+        <li><a href="purchaseDetail">구매 내역</a></li>
+        <li><a href="#section4">장바구니</a></li>
+        <li><a href="myBoard">게시글 관리</a></li>
+        <li><a href="myComment">댓글 관리</a></li>
+        <li><a href="delete">회원 탈퇴</a></li>
+      	{% if user_grade == 2 %}
+        	<li><a href="../store/store-mypage">점주 페이지</a></li>
+      	{% endif %}
+      </ul><br>
+    </div>
+    <br>
+    
+    <div class="col-sm-9">
+      <div class="well">
+        <!-- <h4>홍길동(aaa)님 안녕하세요</h4> -->
+        <h4>{{dto.user_name}}({{memid}})님 안녕하세요</h4>
+      </div>
+      <div class="row">
+        <div class="col-sm-3">
+          <div class="well">
+            <h4 align="center"><a href="addPointHis">포인트</a></h4>
+            <p align="center">{{dto.user_point}}</p>
+            <p align="center"><a href="addPoint">충전하기</a></p> 
+          </div>
+        </div>
+        <div class="col-sm-3">
+          <div class="well">
+            <h4 align="center">주문내역</h4>
+            <p align="center">{{purchase_c}}</p> 
+          </div>
+        </div>
+        <div class="col-sm-3">
+          <div class="well">
+            <h4 align="center">나의 리뷰</h4>
+            <p align="center">{{review_c}}</p> 
+          </div>
+        </div>
+        <div class="col-sm-3">
+          <div class="well">
+            <h4 align="center">장바구니</h4>
+            <p align="center">{{cart_c}}</p> 
+          </div>
+        </div>
+      </div>
+      <div class="row">
+      	<div class="col-sm-12">
+      		<div class="well">
+      		<h4>최근 본 상품</h4>
+      			<img src="https://item.kakaocdn.net/do/227099b086918f895eaa636a43fdc9234022de826f725e10df604bf1b9725cfd">
+      			<img src="https://item.kakaocdn.net/do/227099b086918f895eaa636a43fdc9234022de826f725e10df604bf1b9725cfd">
+      		</div>
+      	</div>
+        <div class="col-sm-4">
+          <div class="well">
+            <p>Text</p> 
+            <p>Text</p> 
+            <p>Text</p> 
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <div class="well">
+            <p>Text</p> 
+            <p>Text</p> 
+            <p>Text</p> 
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <div class="well">
+            <p>Text</p> 
+            <p>Text</p> 
+            <p>Text</p> 
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
+{%endblock%}

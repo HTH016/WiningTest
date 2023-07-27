@@ -1,0 +1,72 @@
+{% extends "search/base.html" %} 
+{% load search_index %}
+{% load mathfilters %}
+{% load static %}
+
+
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title> '와인 이름' 검색 결과 </title>
+		<!-- ♠ bootstrap 적용 -->
+	</head>
+	<body>
+	
+	{% block input %}																			<!-- 검색 입력 창 -->
+			{% csrf_token %}
+			<form method="post" action="searchbynamelist" name="searchbyname">
+				<div style="text-align:center"> 
+					<input class="input" type="text" name="searchname" maxlength="100"
+						style="width:400px; height:30px"  autofocus>	
+					<input class="inputbutton" type="submit" value="검색">	
+				</div>
+			</form>
+	{% endblock %}	
+	<br><br>
+	
+			
+	{% block list %}											<!-- 검색 결과 리스트 출력 -->
+	전체 결과 수 : {{ results_count }}										<!-- 전체 결과 수 출력 -->
+
+		{% if results_count == 0 %}										<!-- 검색 결과 유무에 따라 나눈다 -->
+				검색 결과가 없습니다
+		{% else %}
+			{% for dto_result in dtos_results %}								<!-- 검색 결과가 있다면 반복문으로 나타낸다 -->
+
+				<a href="/detail/winedetail?wine_id={{ dto_result.wine_id }}">
+					<div align="center" style="width:60%; height: 150px; border: 5px solid red; border-radius: 2em;">	    	<!-- 리스트 요소는 <div> 태그로 나타내고 <div> 영역 안에 image, 이름이 있다 -->
+				 		<div align="left" ><img src="{{ dto_result.wine_image.url }}" width="90" height="120"> </div>
+						<div style="text-align:left"> {{ dto_result.wine_name }} </div>
+					</div>
+				</a>
+				<br><br>
+			{% endfor %}
+		{% endif %}
+	
+	{% endblock %}
+		
+
+	
+	</body>
+</html>
+
+
+
+
+
+<!--  
+{% for dto_res in sorted_wine_id %}								
+
+	
+				<a href="../detail/winedetail?wine_id={{i}}">
+					<div align="center" style="width:60%; height: 100px; border: 5px solid red; border-radius: 2em;">													
+				 		<div align="left" ><img src="{{ list_wine_image.i }}" width="50" height="50"> </div>
+						<div style="text-align:left"> {{list_wine_name.i }} </div>
+					</div>
+				</a>
+				<br><br>
+			{% endfor %}
+			
+-->

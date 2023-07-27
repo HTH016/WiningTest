@@ -1,0 +1,84 @@
+{%extends "user/base.html"%}
+{%block title%} <h2>  </h2> {%endblock%}
+{%load static%}
+<link rel="stylesheet" type="text/css" href="{%static 'css/inputUser.css'%}">
+{%block content%}
+{%csrf_token%}
+<!-- inputUser복붙임 이거 나중에 수정 -->
+ 
+ <div class="card signup_v4 mb-30">
+        <div class="card-body">
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link" id="user-tab" data-toggle="tab" href="inputUser" role="tab" aria-controls="inputUser" aria-selected="False">User</a>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link active" id="store-tab" data-toggle="tab" href="inputStore" role="tab" aria-controls="inputStore" aria-selected="true">Store</a>
+                </li>
+            </ul>
+			<div class="tab-content" id="myTabContent">
+				<div class="tab-pane fade show active" id="register" role="tabpanel" aria-labelledby="register-tab">
+				    <h4 class="text-center mt-4 mb-4" style="text-transform: uppercase;">Register</h4>
+				    <form method="post" action="inputStore" name="inputform">
+				    	<input type="hidden" name="check" value=0>
+				        <div class="form-row">
+				            <div class="form-group col-md-12">
+				                <label for="inputName">Your ID</label>
+				                <input type="text" class="form-control" id="user_id" placeholder="Enter your ID" name="user_id">
+				                <input type="button" value="중복확인">
+				            </div>
+				            <div class="form-group col-md-12">
+				                <label for="inputName">Your Password</label>
+				                <input type="password" class="form-control" id="user_passwd" placeholder="Enter your password" name="user_passwd">
+				            </div>
+				        </div>
+				        <div class="form-row">
+				            <div class="form-group col-md-12">
+				                <label for="inputName">Your Confirm Password</label>
+				                <input type="password" class="form-control" id="user_repasswd" placeholder="Enter repassword" name="user_repasswd">
+				            </div>
+				            <div class="form-group col-md-12">
+				                <label for="inputName">Your Name</label>
+				                <input type="text" class="form-control" id="user_name" placeholder="Enter your username" name="user_name">
+				            </div>
+				        </div>
+				        <div class="form-row">
+				            <div class="form-group col-md-12">
+				                <label for="inputName">Your Email Address</label>
+				                <input type="email" class="form-control" id="user_email" placeholder="Enter your email address" name="user_email">
+				            </div>
+				            <div class="form-group col-md-12">
+				                <label for="inputName">Your Tel Number</label>
+				                <input type="text" class="form-control" id="tel" placeholder="Enter your tel number" name="user_tel">
+				            </div>
+				           <!--   
+				            <div class="form-group col-md-12">
+				                <label for="inputName">Your Country</label>
+				                <select id="inputState" class="form-control" required="">
+				                    <option selected="">Choose Country</option>
+				                    <option>India</option>
+				                    <option>United States</option>
+				                    <option>Canda</option>
+				                    <option>Germany</option>
+				                </select>
+				            </div> -->
+				        </div>
+				        
+				        <hr class="mt-3 mb-4">
+				        <div class="col-12">
+				            <div class="d-flex flex-wrap justify-content-between align-items-center">
+				                <div class="custom-checkbox d-block">
+				                    <a href="login" class="nav-link-inline font-size-sm">Already have an account? Login</a>
+				                </div>
+				                <button class="btn btn-primary mt-3 mt-sm-0" type="submit">Register</button>
+				            </div>
+				        </div>
+				    </form>
+				</div>
+			</div>
+		</div>
+</div>	
+
+
+
+{%endblock%}

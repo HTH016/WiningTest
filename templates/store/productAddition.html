@@ -1,0 +1,117 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Wining</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="row" style="text-align: center;">
+        <div class="col">
+            판매 상품 등록
+        </div>
+    </div>
+    <div class="row">
+        <div class="col" style="text-align: center;">
+            제품명으로 검색
+            <input type="text" id="srhByName" onkeypress="searchByName">
+        </div>
+        <div class="col" style="text-align: left;">
+            판매할 주류를 선택해주세요
+        </div>
+    </div>
+    <div class="row" style="height:70vh">
+        <div class="col-4">
+            <div class="row">
+            	<div class="col" style="text-align:center">
+            		제품명
+            	</div>
+            </div>
+            <div id="wineList">
+            {% for wine in wines %}
+                <div class="row">
+                    <div id="{{ wine.wine_name }}"  class="col wineName" >
+                    	<input type="hidden" id="{{ wine.wine_name }}1" value="{{ wine.wine_id }}">
+                    	<input type="hidden" id="{{ wine.wine_name }}2" value="{{ wine.wine_capacity }}">
+                    	<input type="hidden" id="{{ wine.wine_name }}3" value="{{ wine.wine_alc }}">
+                        {{ wine.wine_name }}
+                    </div>
+                </div>
+             {% endfor %}
+             </div>
+        </div>
+        <div class="col">
+        	<div class="row">
+        		<div class="col">
+        			제품명
+        		</div>
+        		<div class="col-1">
+        			용량(ml)
+        		</div>
+        		<div class="col-1">
+        			도수(%)
+        		</div>
+        		<div class="col-1"  style="padding-left:0px; padding-right:0px">
+        			판매가(원)
+        		</div>
+        		<div class="col">
+        			상세 설명
+        		</div>
+        		<div class="col-1">
+        			
+        		</div>
+        	</div>
+
+        	{% csrf_token %}	
+	            <form id="productAdd" action="product-addition" method="post">
+	                <input type="hidden" name="storeId" value="{{store_id}}">
+	                {% for dto in product_list %}
+                        <div class="row">
+                            <input type="hidden" id="{{dto.storeSell__sell_id}}" class="col" name="sellId" value="{{dto.storeSell__sell_id}}" readonly> 
+                            <input type="hidden" id="{{dto.storeSell__wine__wine_name}}4" class="col" name="wineId" value="{{dto.storeSell__wine__wine_id}}" readonly> 
+                            <input type="text" class="col" name="wineName" value="{{dto.storeSell__wine__wine_name}}" readonly>
+                            <input type="text" class="col-1" name="wineCapacity" value="{{dto.storeSell__wine__wine_capacity}}" readonly>
+                            <input type="text" class="col-1" name="wineAlc" value="{{dto.storeSell__wine__wine_alc}}" readonly>
+                            <input type="text" class="col-1" name="sellPrice" value="{{dto.storeSell__sell_price}}" maxlength=5>
+                            <input type="text" class="col" name="sellPromot" value="{{dto.storeSell__sell_promot}}">
+                            <input type="button" name="btnDelete" class="col-1" value="판매 중지">   
+                        </div>
+                    {% endfor %}
+	            </form>
+	            
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col" style="text-align: center;">
+            {% if modify != '1' %}
+                <input type="submit" name="btnProductAdd" form="productAdd" value="회원가입 완료">
+            {% endif %}
+            {% if modify == '1' %}
+                <input type="submit" name="btnProductAdd" form="productAdd" value="저장">
+            {% endif %}
+            <input type="button" name="btnExcelUpload" value="엑셀로 업로드" onclick="location='excel-upload'">
+            {% if modify != '1' %}
+                <input type="submit" name="btnCancelRegist" form="productAdd" value="등록 취소">
+                <input type="submit" name="btnBackRegist" value="뒤로가기" onclick="location='store-registration">
+            {% endif %}
+            {% if modify == '1' %}
+                <input type="button" name="btnBack" value="뒤로가기" onclick="location='product-list'">
+            {% endif %}
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+        crossorigin="anonymous"></script>
+    <script src="{% static 'js/productAdditionScript.js' %}" ></script>
+</body>
+
+</html>

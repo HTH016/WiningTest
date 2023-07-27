@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Wining</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="row">
+        <div class="col">
+            <input type="button" id="btnStoreInfo" value="회원 정보 보기" onclick="location='store-info'">
+        </div>
+        <div class="col"></div>
+        <div class="col">
+            <input type="button" id="btnSellList" value="판매 내역 보기" onclick="location='sell-detail-list'">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col"></div>
+        <div class="col" style="text-align:center">
+            <input type="button" id="btnProductList" value="판매 주류 보기" onclick="location='product-list'">
+            <input type="button" id="btnSearchReceiveCode" value="수령 코드 검색 하기">
+        </div>
+        <div class="col"></div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <input type="button" id="btnStoreStatistics" value="통계 정보 보기">
+        </div>
+        <div class="col"></div>
+        <div class="col">
+            <input type="button" id="btnStoreRevenue" value="매출 정보 보기" onclick="location='store-revenue'">
+        </div>
+    </div>
+	<br><br>
+			{% if request.session.memid  %}
+			<div class="right-align">
+  				<a href="/user/logout" class="btn btn-primary"> 로그아웃 </a> &nbsp;&nbsp;&nbsp;
+  				<a href="/user/myPage" class="btn btn-primary"> 마이페이지 </a> &nbsp;&nbsp;&nbsp;
+				<a href="/board/list" class="btn btn-primary"> 게시판 </a> &nbsp;&nbsp;&nbsp;&nbsp;
+				<a href="/search/main" class="btn btn-primary"> 메인/검색 </a> &nbsp;&nbsp;&nbsp;&nbsp;
+			</div>
+			{% else %}
+			<div class="right-align">
+  				<a href="/user/login" class="btn btn-primary"> 로그인 </a> &nbsp;&nbsp;&nbsp;
+				<a href="/board/list" class="btn btn-primary"> 게시판 </a> &nbsp;&nbsp;&nbsp;&nbsp;
+				<a href="/search/main" class="btn btn-primary"> 메인/검색 </a> &nbsp;&nbsp;&nbsp;&nbsp;
+			</div>
+			{% endif %}
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

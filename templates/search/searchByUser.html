@@ -1,0 +1,47 @@
+{% extends "search/base.html" %} 
+{% load static %}
+
+
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title> Wining </title>
+		<!-- ♠ bootstrap 적용 -->
+	</head>
+	<body> 
+		
+		<br><br>						
+
+		<br><br>
+		{% block input %}
+			{% csrf_token %}
+<!--  
+<input type="checkbox" name="name1" id="c0" value="value0" checked="checked" onClick="example_0();">			
+<input type="checkbox" name="name1" id="c1" value="value1" onClick="example_1();">
+<input type="checkbox" name="name1" id="c2" value="value2" onClick="example_1();">
+<input type="checkbox" name="name1" id="c3" value="value3" onClick="example_1();">
+<input type="checkbox" name="name1" id="c4" value="value4" onClick="example_1();">
+<input type="checkbox" name="name1" id="c5" value="value5" onClick="example_1();">
+<input type="checkbox" name="name1" id="c6" value="value6" onClick="example_1();">
+-->
+
+
+			
+			<form method="post" action="searchbyuserlist" name="searchbyuser">
+				
+
+				<input class="inputbutton" type="submit" value="검색">
+				
+			</form>
+		{% endblock %}
+
+
+
+		{% block list %}
+		
+		{% endblock %}
+
+	</body>
+</html>

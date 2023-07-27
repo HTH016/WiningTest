@@ -1,0 +1,43 @@
+{% extends "search/base.html" %} 
+{% load static %}
+{% load mathfilters %} 
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title> '와인 이름' 검색 결과 </title>
+	</head>
+	<body>
+	
+	{% block input %}
+			{% csrf_token %}
+			<form method="post" action="searchbyuserlist" name="searchbyuser">
+					
+					<input class="inputbutton" type="submit" value="검색">	
+				</div>
+			</form>
+	{% endblock %}	
+	<br><br>
+	
+			
+	{% block list %}
+
+			
+				<div style="text-align:center">													<!-- 리스트 요소는 <div> 태그로 나타내고 <div> 영역 안에 image, 이름이 있다 -->
+			 		<div align="left" ><img src="images/50x50.png" alt="Image"> </div>
+					<div style="text-align:left">  </div>
+				</div>
+				<br><br>
+	
+			
+			
+			
+			
+			
+			
+	{% endblock %}
+		
+	
+	</body>
+</html>

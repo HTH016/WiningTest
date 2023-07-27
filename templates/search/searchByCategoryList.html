@@ -1,0 +1,52 @@
+{% extends "search/base.html" %} 
+{% load static %}
+{% load mathfilters %} 
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title> '와인 이름' 검색 결과 </title>
+	</head>
+	<body>
+	
+	{% block input %}
+			{% csrf_token %}
+			
+		1 : {{list_kind}} <br>
+        2 : {{list_capacity}} <br>
+        3 : {{list_alcohol}} <br>
+        4 : {{list_dangdo}} <br>
+        5 : {{list_sando}} <br>
+        6 : {{list_tannin}} <br>
+        7 : {{list_food}} <br> 
+        8 : {{list_region}} <br>
+	
+			
+	{% endblock %}	
+	<br><br>
+	{% block list %}
+	전체 결과 수 : {{ results_count }}										<!-- 전체 결과 수 출력 -->
+<br><br>
+
+		{% if count == 0 %}										<!-- 검색 결과 유무에 따라 나눈다 -->
+				검색 결과가 없습니다
+		{% else %}
+			{% for dto_result in dtos_results %}								<!-- 검색 결과가 있다면 반복문으로 나타낸다 -->
+				<a href="../detail/winedetail?wine_id={{ index }}">
+					<div align="center" style="width:60%; height: 100px; border: 5px solid red; border-radius: 2em;">													<!-- 리스트 요소는 <div> 태그로 나타내고 <div> 영역 안에 image, 이름이 있다 -->
+				 		<div align="left" ><img src="images/50x50.png" alt="Image"> </div>
+						<div style="text-align:left"> {{dto.wine_name}} </div>
+					</div>
+				</a>
+				<br><br>
+			{% endfor %}
+		{% endif %}
+	
+	{% endblock %}
+		
+
+		
+	
+	</body>
+</html>

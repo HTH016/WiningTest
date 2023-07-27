@@ -1,0 +1,45 @@
+{% extends "board/base.html" %}
+
+{% block title %} <h2>  글 수 정 </h2> {% endblock %}
+
+{% csrf_token %}
+{% block content %}
+<form method="post" action="update" name="passwdform">
+	<input type="hidden" name="num" value="{{ num }}">
+	<input type="hidden" name="pagenum" value="{{ pagenum }}">
+	
+	<table>
+		<tr>
+			<th colspan="2">
+				{% if message %}
+					{{ message }}
+				{% else %}
+					비밀번호를 다시 확인하세요...
+				{% endif %}
+			</th>
+		</tr>
+
+
+		<tr>
+			<th> 비밀번호 </th>
+			<td> <input class="input" type="password" name="passwd" maxlength="50" autofocus> </td>
+		</tr>
+		<tr>
+			<th colspan="2">
+				<input class="inputbutton" type="submit" value="확인">
+				<input class="inputbutton" type="button" value="수정취소"
+						onclick="location='list?pagenum={{ pagenum }}'">
+			</th>
+		</tr>
+	
+	</table>
+
+</form>
+
+
+
+{% endblock %}
+
+
+
+

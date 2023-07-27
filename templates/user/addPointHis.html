@@ -1,0 +1,46 @@
+{%load static%}
+{%csrf_token%}
+<link rel="stylesheet" type="text/css" href="{%static 'css/addPointHis.css'%}">
+<script src="{%static 'js/jquery-3.6.4.js'%}"></script>
+<script src="{%static 'js/script_user.js'%}"></script>
+
+{%block title%} <h2>  </h2> {%endblock%}
+
+{%block content%}
+<div class="page-content page-container" id="page-content">
+    <div class="padding">
+        <div class="row container d-flex justify-content-center">
+
+		<div class="col-lg-8 grid-margin stretch-card">
+		<div class="card">
+		<div class="card-body">
+			<h4 class="card-title">포인트 충전 내역</h4>
+			<div class="table-responsive">
+			<table class="table">
+				<thead>
+					<tr>
+						<th>충전 id</th>
+						<th>충전일시</th>
+						<th>충전값</th>
+					</tr>
+				</thead>
+				<tbody>
+					{%for dto in dtos%}
+					<tr >
+						<td>{{dto.point_his_id}}</td>
+						<td>{{dto.point_reg}}</td>
+						<td>{{dto.point_add}}</td>
+					</tr>
+					{%endfor%}
+				</tbody>
+			</table>
+			</div>
+		</div>
+		</div>
+		</div>
+		<input type="button" onclick="location='myPage'" value="닫기">
+		</div>
+	</div>
+</div>
+
+{%endblock%}

@@ -1,0 +1,198 @@
+{% extends "board/base.html" %}
+{% load mathfilters %}
+{% load static %}
+
+{% block title %}
+  <h2>자유 게시판 ( 총 : {{ count }}개 )</h2>
+{% endblock %}
+
+{% block content %}
+<head>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+
+<button class="btn btn-primary scroll-button top-button" onclick="scrollToTop()"><i class="fas fa-arrow-up"></i> </button>
+<button class="btn btn-primary scroll-button bottom-button" onclick="scrollToBottom()"><i class="fas fa-arrow-down"></i></button>
+
+
+
+
+
+
+	<div class="container my-3">
+	  <div class="row">
+	    <div class="col-lg-6 mb-3">
+	      <form class="d-flex" method="get" action="{% url 'board:list' %}">
+	        <input class="form-control me-2" type="search" name="q" placeholder="검색어를 입력하세요" style="width:900px;">
+	        <button class="btn btn-outline-primary" type="submit" style="width:150px;">검색</button>
+	      </form>
+	    </div>
+	    	{% if request.session.memid  %}
+			    <div class="col-lg-6 mb-3 text-end">
+			      <a href="{% url 'board:write' %}" class="btn btn-outline-primary">글쓰기</a>
+			    </div>
+	  		{% endif %}
+	  </div>
+
+  <!-- 검색 결과 표시 -->
+  {% if search_query %}
+    <h3>검색 결과 : <span style="color:red;">"{{ search_query }}"</span> 에 해당하는 글이 <span style="color:red;">{{count}} </span>개 있습니다.</h3>
+  {% endif %}
+
+
+	
+    
+    
+    <br>
+    <div class="table-responsive">
+      <table class="table">
+        <thead>
+          <tr class="table-dark">
+            <th style="width: 7%; text-align:center;">글번호</th>
+            <th style="width: 40%">제목</th>
+            <th style="width: 10%; text-align:center;">작성자</th>
+            <th style="width: 15%; text-align:center;">작성일</th>
+            <th style="width: 8%; text-align:center;">조회수</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% if count == 0 %}
+            <tr>
+              <td colspan="5" align="center">
+               	"{{search_query}}" 에 해당하는 글이 없습니다.
+              </td>
+            </tr>
+          {% else %}
+            {% for dto in dtos %}
+              <tr>
+                <td align="center">
+                	{{ number|sub:forloop.counter0|abs }}</td>
+                <td>
+                  {% if dto.board_read_count != -1 %}
+                    <a href="content?num={{ dto.board_id }}&pagenum={{ pagenum }}&number={{ number|sub:forloop.counter0|abs }}" >
+                      {{ dto.board_title }}
+                      <span class="comment-count" style="color:blue;"> ({{ dto.comment_count }})</span>
+                    </a>
+                  {% else %}
+                    삭제된 글입니다.
+                  {% endif %}
+                </td>
+                <td align="center" style="color:cadetblue;">
+                  {% if dto.board_read_count == -1 %}
+                    &nbsp;
+                  {% else %}
+                    {{ dto.user_id }}
+                  {% endif %}
+                </td>
+                <td align="center">
+                  {% if dto.board_read_count == -1 %}
+                    &nbsp;
+                  {% else %}
+                    {{ dto.board_reg_time|date:"Y-m-d H:i:s" }}
+                  {% endif %}
+                </td>
+                <td align="center">
+                  {% if dto.board_read_count == -1 %}
+                    &nbsp;
+                  {% else %}
+                    {{ dto.board_read_count }}
+                  {% endif %}
+                </td>
+              </tr>
+            {% endfor %}
+          {% endif %}
+        </tbody>
+      </table>
+    </div>	
+</div>
+
+
+
+
+
+
+    <div class="pagination justify-content-center">
+      {% if startpage > pageblock %}
+        <a href="{% url 'board:list' %}?pagenum={{ startpage|sub:pageblock }}">&laquo;</a>
+      {% endif %}
+
+      {% for i in pages %}
+        {% if i == pagenum %}
+          <span class="current-page">{{ i }}</span>
+        {% else %}
+          <a href="{% url 'board:list' %}?pagenum={{ i }}">{{ i }}</a>
+        {% endif %}
+      {% endfor %}
+
+      {% if pagecount > endpage %}
+        <a href="list?pagenum={{ startpage|add:pageblock }}" class="page-link">&raquo;</a>
+      {% endif %}
+    </div><br><br>
+    
+    
+	<script>
+		function scrollToTop() {
+		  window.scrollTo(0, 0);
+		}
+	
+		function scrollToBottom() {
+		  window.scrollTo(0, document.body.scrollHeight);
+		}
+	</script>
+
+  <style>
+  .scroll-button {
+    position: fixed;
+    padding: 5px;
+    font-size: 18px;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    color:grey;
+  }
+
+  .top-button {
+    bottom: 60px;
+    right: 20px;
+  }
+
+  .bottom-button {
+    bottom: 20px;
+    right: 20px;
+  }
+  
+  
+  
+  
+  
+  	.title-text {
+  		color: pink;
+  	}
+  
+  
+    .pagination {
+      margin-top: 20px;
+    }
+
+    .pagination a,
+    .pagination span {
+      display: inline-block;
+      margin: 5px;
+      padding: 5px 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      text-decoration: none;
+      color: #333;
+    }
+
+    .pagination a:hover {
+      background-color: #f0f0f0;
+    }
+
+    .pagination .current-page {
+      background-color: #007bff;
+      color: #fff;
+      border-color: #007bff;
+    }
+  </style>
+{% endblock %}

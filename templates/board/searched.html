@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="row">
+    <div class="col-lg-6 mb-3">
+      <form class="d-flex" method="get" action="{% url 'board:list' %}">
+        <input class="form-control me-2" type="search" name="q" placeholder="검색어를 입력하세요" style="width:900px;">
+        <button class="btn btn-outline-primary" type="submit" style="width:150px;">검색</button>
+      </form>
+    </div>
+    <div class="col-lg-6 mb-3 text-end">
+      <a href="{% url 'board:write' %}" class="btn btn-outline-primary">글쓰기</a>
+    </div>
+  </div>
+
+  <h1>검색 결과</h1>
+
+{% if query %}
+    <h3>검색어: {{ query }}</h3>
+  {% endif %}
+
+  {% if posts %}
+    <ul>
+      {% for post in posts %}
+        <li>{{ post.title }}</li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>검색 결과가 없습니다.</p>
+  {% endif %}
+
+{% endblock %}

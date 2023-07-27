@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Wining</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+</head>
+<body>
+
+	<div class="row">
+		<div class="col">
+			<h1>판매 주류 보기</h1>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col">
+			제품명
+		</div>
+		<div class="col">
+			판매가
+		</div>
+		<div class="col">
+			도수
+		</div>
+		<div class="col">
+			용량
+		</div>
+		<div class="col">
+			상세 설명
+		</div>
+		<div class="col">
+			
+		</div>
+	</div>
+	<form method="post" action="prdctlist-modification" name="productListModify">
+	{% for dto in dtos %}
+		<div class="row">
+			<div class="col">
+				<input type="text" name="wineName" value="{{dto.wine_name}}">
+			</div>
+			<div class="col">
+				<input type="text" name="sellPrie" value="{{dto.sell_price}}">
+			</div>
+			<div class="col">
+				<input type="text" name="wineAlc" value="{{dto.wine_alc}}">
+			</div>
+			<div class="col">
+				<input type="text" name="wineCapacity" value="{{dto.wine_capacity}}">
+			</div>
+			<div class="col">
+				<input type="text" name="sellPromot" value="{{dto.sell_promot}}">
+			</div>
+			<div class="col">
+				<input type="button" name="btnShowProductReview" value="리뷰 보기">
+				<input type="hidden" name="btnDiscontinue" value="판매 중단">
+			</div>
+		</div>
+	{% endfor %}
+		
+		<div class="row">
+			<div class="col" style="text-align:center">
+				<input type="submit" id="btnModify" value="수정">
+				<input type="button" id="btnBack" value="뒤로가기">
+			</div>
+		</div>
+	</form>
+	
+
+
+
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

@@ -1,0 +1,64 @@
+{% extends "search/base.html" %} 
+{% load static %}
+
+
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title> Wining </title>
+		<!-- ♠ bootstrap 적용 -->
+	</head>
+	<body> 
+		
+		<br><br>						
+
+		<br><br>
+		{% block input %}
+			{% csrf_token %}
+<!--  
+<input type="checkbox" name="name1" id="c0" value="value0" checked="checked" onClick="example_0();">			
+<input type="checkbox" name="name1" id="c1" value="value1" onClick="example_1();">
+<input type="checkbox" name="name1" id="c2" value="value2" onClick="example_1();">
+<input type="checkbox" name="name1" id="c3" value="value3" onClick="example_1();">
+<input type="checkbox" name="name1" id="c4" value="value4" onClick="example_1();">
+<input type="checkbox" name="name1" id="c5" value="value5" onClick="example_1();">
+<input type="checkbox" name="name1" id="c6" value="value6" onClick="example_1();">
+-->
+
+
+			
+			<form method="post" action="searchbyranklist" name="searchbyrank">
+				<div style="text-align:center"> 
+					<div> 
+						<select name="rank_category">
+						<option value="detailview"> 조회수 </option> 
+						<option value="purchaseqnty"> 구매수 </option>
+						<option value="sellregist"> 판매 등록 수 </option>
+						<option value="reviewqnty"> 리뷰 개수 </option>
+						<option value="reviewavg"> 리뷰 평점 </option>
+						<option value="boardword"> 게시판 언급 </option>
+						<option value="priceavg"> 평균 가격 </option>
+					</select>
+					</div>
+
+					<br>
+					<div> 
+						<input type="number" name="rank_qnty" placeholder="개수 입력">
+					</div>
+					<br>
+					
+				<input class="inputbutton" type="submit" value="검색">
+				
+			</form>
+		{% endblock %}
+
+
+
+		{% block list %}
+		
+		{% endblock %}
+
+	</body>
+</html>

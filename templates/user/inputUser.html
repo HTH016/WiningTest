@@ -1,0 +1,176 @@
+{%extends "user/base.html"%}
+{%block title%} <h2>  </h2> {%endblock%}
+{%load static%}
+<link rel="stylesheet" type="text/css" href="{%static 'css/inputUser.css'%}">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
+{%block content%}
+{%csrf_token%}
+ 
+ <div class="card signup_v4 mb-30">
+        <div class="card-body">
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link active" id="user-tab" data-toggle="tab" href="inputUser" role="tab" aria-controls="inputUser" aria-selected="true">User</a>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link" id="store-tab" data-toggle="tab" href="inputStore" role="tab" aria-controls="inputStore" aria-selected="False">Store</a>
+                </li>
+            </ul>
+			<div class="tab-content" id="myTabContent">
+				<div class="tab-pane fade show active" id="register" role="tabpanel" aria-labelledby="register-tab">
+				    <h4 class="text-center mt-4 mb-4" style="text-transform: uppercase;">Register</h4>
+				    <form method="post" action="inputUser" name="inputform">
+				    	<input type="hidden" name="check" value=0>
+				        <div class="form-row">
+				            <div class="form-group col-md-12">
+				                <label for="inputName">Your ID</label>
+				                <input type="text" class="form-control" id="user_id" placeholder="Enter your ID" name="user_id">
+				                <input type="button" value="중복확인">
+				            </div>
+				            <div class="form-group col-md-12">
+				                <label for="inputName">Your Password</label>
+				                <input type="password" class="form-control" id="user_passwd" placeholder="Enter your password" name="user_passwd">
+				            </div>
+				        </div>
+				        <div class="form-row">
+				            <div class="form-group col-md-12">
+				                <label for="inputName">Your Confirm Password</label>
+				                <input type="password" class="form-control" id="user_repasswd" placeholder="Enter repassword" name="user_repasswd">
+				            </div>
+				            <div class="form-group col-md-12">
+				                <label for="inputName">Your Name</label>
+				                <input type="text" class="form-control" id="user_name" placeholder="Enter your name" name="user_name">
+				            </div>
+				        </div>
+				        <div class="form-row">
+				            <div class="form-group col-md-12">
+				                <label for="inputName">Your Email Address</label>
+				                <input type="email" class="form-control" id="user_email" placeholder="Enter your email address" name="user_email">
+				            </div>
+				            <div class="form-group col-md-12">
+				                <label for="inputName">Your Tel Number</label>
+				                <input type="text" class="form-control" id="tel" placeholder="Enter your tel number( include - )" name="user_tel">
+				            </div>
+				        </div>
+				        <div class="form-row">
+				            <div class="form-group col-md-12">
+				                <label for="inputName">Your Favorite</label><br>
+				                	회원 맞춤 정보를 위한 survey 입니다 
+				                <br><br>
+				                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label for="inputName"> 어떤 색의 와인을 즐기고싶나요? </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				                <input type="checkbox" name="color" id="color0" value="0" checked="checked"> 선택없음 &nbsp;
+				                <input type="checkbox" name="color" id="color1" value="1"> 붉은색&nbsp;
+				                <input type="checkbox" name="color" id="color2" value="2"> 연노란색&nbsp;
+				                <input type="checkbox" name="color" id="color3" value="3"> 분홍색&nbsp;
+				                <input type="checkbox" name="color" id="color4" value="4"> 어두운색&nbsp;
+				                <input type="checkbox" name="color" id="color5" value="5"> 밝은색 <br>
+				                
+				                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label for="inputName"> 선호하는 주종이 있나요? </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				                <input type="checkbox" name="alc" id="alc0" value="0" checked="checked"> 선택없음 &nbsp;
+				                <input type="checkbox" name="alc" id="alc1" value="1"> 맥주 &nbsp;
+				                <input type="checkbox" name="alc" id="alc2" value="2"> 소주 &nbsp;
+				                <input type="checkbox" name="alc" id="alc3" value="3"> 위스키 &nbsp;
+				                <input type="checkbox" name="alc" id="alc4" value="4"> 다 좋아요  &nbsp;
+				                <input type="checkbox" name="alc" id="alc5" value="5"> 와인으로 술을 처음 시도해봐요<br>
+				                
+				                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label for="inputName"> 와인을 마신다면 선호하는 인원 수는? </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				                <input type="checkbox" name="comp_num" id="comp_num0" value="0" checked="checked"> 선택없음 &nbsp;
+				                <input type="checkbox" name="comp_num" id="comp_num1" value="1"> 혼술 &nbsp;
+				                <input type="checkbox" name="comp_num" id="comp_num2" value="2"> 2명이서 &nbsp;
+				                <input type="checkbox" name="comp_num" id="comp_num3" value="3"> 3~5명 모임 &nbsp;
+				                <input type="checkbox" name="comp_num" id="comp_num4" value="4"> 6명 이상 &nbsp;<br>
+				                
+				                <br> 와인의 어떤 맛을 원하나요?  <br>
+				                
+				                
+				                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label for="inputName"> 나는 단맛이 좋다 </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				                <input type="checkbox" name="sweet" id="sweet1" value="1"> 매우 그렇다 &nbsp;
+				                <input type="checkbox" name="sweet" id="sweet2" value="2"> 그렇다 &nbsp;
+				                <input type="checkbox" name="sweet" id="sweet3" value="3" checked="checked"> 보통(모르겠다) &nbsp;
+				                <input type="checkbox" name="sweet" id="sweet4" value="4"> 그렇지 않다 &nbsp;
+				                <input type="checkbox" name="sweet" id="sweet5" value="5"> 전혀 그렇지 않다 <br>
+				                
+				                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label for="inputName">  나는 떫은 맛(쓴맛)이 좋다 </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				                <input type="checkbox" name="bitter" id="bitter1" value="1"> 매우 그렇다 &nbsp;
+				                <input type="checkbox" name="bitter" id="bitter2" value="2"> 그렇다 &nbsp;
+				                <input type="checkbox" name="bitter" id="bitter3" value="3" checked="checked"> 보통(모르겠다) &nbsp;
+				                <input type="checkbox" name="bitter" id="bitter4" value="4"> 그렇지 않다 &nbsp;
+				                <input type="checkbox" name="bitter" id="bitter5" value="5"> 전혀 그렇지 않다 <br>
+				                
+				                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label for="inputName">  나는 신맛(새콤한 맛)이 좋다 </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				                <input type="checkbox" name="sour" id="sour1" value="1"> 매우 그렇다 &nbsp;
+				                <input type="checkbox" name="sour" id="sour2" value="2"> 그렇다 &nbsp;
+				                <input type="checkbox" name="sour" id="sour3" value="3" checked="checked"> 보통(모르겠다) &nbsp;
+				                <input type="checkbox" name="sour" id="sour4" value="4"> 그렇지 않다 &nbsp;
+				                <input type="checkbox" name="sour" id="sour5" value="5"> 전혀 그렇지 않다 <br>
+				                
+				                <br><br>
+				                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label for="inputName"> 와인을 특히 즐기고싶은 계절이 있다면? </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+				                <input type="checkbox" name="season" id="season0" value="0" checked="checked"> don't care
+				                <input type="checkbox" name="season" id="season1" value="1"> 봄 &nbsp;
+				                <input type="checkbox" name="season" id="season2" value="2"> 여름 &nbsp;
+				                <input type="checkbox" name="season" id="season3" value="3"> 가을 &nbsp;
+				                <input type="checkbox" name="season" id="season4" value="4"> 겨울 &nbsp; <br>
+				                <br>
+				                
+				                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label for="inputName"> 와인과 함께 먹고싶은 음식은? </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				                <input type="checkbox" name="food" id="food0" value="0" checked="checked"> 선택없음 &nbsp;
+				                <input type="checkbox" name="food" id="food1" value="1"> 스테이크(소고기) &nbsp;
+				                <input type="checkbox" name="food" id="food2" value="2"> 돼지고기 &nbsp;
+				                <input type="checkbox" name="food" id="food3" value="3"> 생선류 &nbsp;
+				                <input type="checkbox" name="food" id="food4" value="4"> 치킨 &nbsp; 
+				                <input type="checkbox" name="food" id="food5" value="5"> 해산물 &nbsp; <br>
+
+
+								 <br> 우선 순위 <br>
+								 
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label for="inputName"> 1등 </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				                <input type="radio" name="fav_first" id="fav_first0" value="0"> 선택없음 &nbsp;
+				                <input type="radio" name="fav_first" id="fav_first1" value="1"> 색깔 &nbsp;
+				                <input type="radio" name="fav_first" id="fav_first2" value="2"> 도수 &nbsp;	          
+				                <input type="radio" name="fav_first" id="fav_first4" value="3"> 단맛 &nbsp;
+				                <input type="radio" name="fav_first" id="fav_first5" value="4"> 쓴맛 &nbsp;
+				                <input type="radio" name="fav_first" id="fav_first6" value="5"> 신맛 &nbsp;				                
+				                <input type="radio" name="fav_first" id="fav_first8" value="6"> 음식 &nbsp; <br>
+				                 
+				                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label for="inputName"> 2등 </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				                <input type="radio" name="fav_second" id="fav_second0" value="0"> 선택없음 &nbsp;
+				                <input type="radio" name="fav_second" id="fav_second1" value="1"> 색깔 &nbsp;
+				                <input type="radio" name="fav_second" id="fav_second2" value="2"> 도수 &nbsp;				               
+				                <input type="radio" name="fav_second" id="fav_second4" value="3"> 단맛 &nbsp;
+				                <input type="radio" name="fav_second" id="fav_second5" value="4"> 쓴맛 &nbsp;
+				                <input type="radio" name="fav_second" id="fav_second6" value="5"> 신맛 &nbsp;				              
+				                <input type="radio" name="fav_second" id="fav_second8" value="6"> 음식 &nbsp; <br>
+				                
+				                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label for="inputName"> 3등 </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				                <input type="radio" name="fav_third" id="fav_third0" value="0"> 선택없음 &nbsp;
+				                <input type="radio" name="fav_third" id="fav_third1" value="1"> 색깔 &nbsp;
+				                <input type="radio" name="fav_third" id="fav_third2" value="2"> 도수 &nbsp;				             
+				                <input type="radio" name="fav_third" id="fav_third4" value="3"> 단맛 &nbsp;
+				                <input type="radio" name="fav_third" id="fav_third5" value="4"> 쓴맛 &nbsp;
+				                <input type="radio" name="fav_third" id="fav_third6" value="5"> 신맛 &nbsp;				               
+				                <input type="radio" name="fav_third" id="fav_third8" value="6"> 음식 &nbsp; <br>
+
+				            </div>
+				        </div>
+				        <script src="{% static 'js/userFavoriteSurvey.js' %}" ></script>
+				        <hr class="mt-3 mb-4">
+				        <div class="col-12">
+				            <div class="d-flex flex-wrap justify-content-between align-items-center">
+				                <div class="custom-checkbox d-block">
+				                    <a href="login" class="nav-link-inline font-size-sm">Already have an account? Login</a>
+				                </div>
+				                <button class="btn btn-primary mt-3 mt-sm-0" type="submit">Register</button>
+				            </div>
+				        </div>
+				    </form>
+				</div>
+			</div>
+		</div>
+</div>	
+
+
+
+{%endblock%}

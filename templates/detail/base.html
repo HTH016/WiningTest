@@ -1,0 +1,33 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title> search </title>
+		<script src="{% static 'js/jquery-3.6.4.js' %}"></script>
+		<script src="{% static 'js/script_search.js' %}"></script>
+	</head>
+	<body>
+																		<!-- 비로그인 상태의 상단 메뉴 -->
+		<a href="/user/login"> 로그인 </a> &nbsp;&nbsp;&nbsp;		<!-- localhost:8000/member/main -->
+		<a href="/board/list"> 게시판 </a> &nbsp;&nbsp;&nbsp;			<!-- localhost:8000/board/list -->
+																	
+																	<!--  로그인 상태의 상단 메뉴 -->
+		<br><br>						
+		{% block title %} 
+			<h2 align="center"> Wining </h2> 
+		{% endblock %}
+		<br><br>
+		
+		
+		{% block detail %}
+		
+		{% endblock %}
+		<br><br>
+		{% block recommend %}
+		
+		{% endblock %}
+		<br><br>
+		
+	</body>
+</html>

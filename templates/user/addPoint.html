@@ -1,0 +1,54 @@
+{%load static%}
+{%csrf_token%}
+<link rel="stylesheet" type="text/css" href="{%static 'css/addPoint.css'%}">
+<script src="{%static 'js/jquery-3.6.4.js'%}"></script>
+<script src="{%static 'js/script_user.js'%}"></script>
+{%block title%} <h2>  </h2> {%endblock%}
+
+{%block content%}
+<form method="post" action="addPoint" name="addpoint">
+<div class="container">
+	<div class="wrapper"> 
+		<div class="outer-card"> 
+			<div class="forms"><br><br>
+			<div class="input-items"> 
+				<input id="chargePoint" name="point" type="number" placeholder="충전금액을 입력해주세요" size="19"> 
+			</div>
+			<br><br>
+			<div class="input-items"> 
+				<span>보유 포인트</span> 
+				<span id="currentPoint">{{dto.user_point}}</span>
+			</div>
+			<br><br>
+			</div> 
+			<div class="input-buttons"> 
+				<input type="submit" id="charge" value="충전하기">
+			</div> 
+		</div> 
+	</div> 
+</div>
+</form>
+
+
+<!-- 
+<script>
+	function calculatePoints() {
+		var chargePoint = parseInt(document.getElementById("chargePoint").value);
+		var currentPoint = parseInt(document.getElementById("currentPoint").value);
+		
+		$.ajax({
+			url: "/addPoint",
+			type: "post",
+			data : {amount: chargePoint, points: currentPoint},
+			success: function(response) {
+				var afterChargePoint = response.afterchargepoint;
+				document.getElementById("afterChargePoint").textContent = afterChargePoint;
+			},
+			error: function(xhr, status, error) {
+				console, log("Error :", error);
+			}
+		});
+	}
+</script>
+ -->
+{%endblock%}
